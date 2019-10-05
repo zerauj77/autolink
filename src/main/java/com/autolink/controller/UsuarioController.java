@@ -30,6 +30,20 @@ public class UsuarioController {
 		return usuarioRepository.save(usu);
 	}
 	
+	public Usuarios save(){
+		Usuarios usu = new Usuarios();
+		usu.setNombre("prueba1");
+		usu.setEmail("prueba2");
+		usu.setContra("prueba3");
+		usu.setUsuario("prueba4");
+		TipoUsuario tp = new TipoUsuario();
+		tp.setId(BigDecimal.ONE);
+		tp.setNombre("Admin");
+		usu.setTipo(tp);
+		
+		return usuarioRepository.save(usu);
+	}
+	
 	public TipoUsuario getOneTipoUsuario(String name) {
 		return tpRepository.findByNombre(name);
 	}

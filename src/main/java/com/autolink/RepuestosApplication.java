@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.autolink.controller.LoginController;
+import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 
 @SpringBootApplication
@@ -22,6 +23,11 @@ public class RepuestosApplication {
 	@Bean
 	public UsuarioController usuarioController(){
 		return new UsuarioController();
+	}
+	
+	@Bean
+	public TallerController tallerController(){
+		return new TallerController();
 	}
 
 }

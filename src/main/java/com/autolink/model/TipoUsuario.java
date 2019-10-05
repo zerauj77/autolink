@@ -30,7 +30,7 @@ public class TipoUsuario implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "nombre", length = 50)
+	@Column(name = "nombretipo", length = 50)
 	public String getNombre() {
 		return nombre;
 	}

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,11 +20,12 @@ public class Usuarios implements java.io.Serializable {
 	private String usuario;
 	private String nombre;
 	private String pass;
+	private String email;
 	private TipoUsuario tipo;
 	
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false, precision = 11, scale = 0)
 	public BigDecimal getId() {
 		return id;
@@ -59,9 +61,18 @@ public class Usuarios implements java.io.Serializable {
 	public void setContra(String contra) {
 		this.pass = contra;
 	}
+	
+	@Column(name = "email", length = 50)
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@ManyToOne
-	@JoinColumn(name = "idtipo",insertable=false, updatable=false)
+	@JoinColumn(name = "idtipo",insertable=true, updatable=false)
 	public TipoUsuario getTipo() {
 		return tipo;
 	}
@@ -69,9 +80,5 @@ public class Usuarios implements java.io.Serializable {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
-	
-	
-
-	
 	
 }
