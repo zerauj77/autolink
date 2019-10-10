@@ -1,7 +1,7 @@
 package com.autolink.model;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,9 @@ public class TipoUsuario implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private BigDecimal id;
 	private String nombre;
+	private boolean estado;
+	private Date fechacreacion;
+	private String usuariocrea;
 	
 	
 	
@@ -36,6 +39,34 @@ public class TipoUsuario implements java.io.Serializable {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	@Column(name = "usuariocrea", length = 50)
+	public String getUsuariocrea() {
+		return usuariocrea;
+	}
+
+	public void setUsuariocrea(String usuariocrea) {
+		this.usuariocrea = usuariocrea;
+	}
+
+	@Column(name = "estado")
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	
+	@Column(name = "fechacreacion")
+	public Date getFechacreacion() {
+		return fechacreacion;
+	}
+
+	public void setFechacreacion(Date fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
 	

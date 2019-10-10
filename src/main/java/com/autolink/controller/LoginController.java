@@ -59,8 +59,8 @@ public class LoginController {
 	public GenericResponse recuperarPassword(String usuario) throws MessagingException, IOException {
 		try {
 			Usuarios usu = usuarioRepository.findByUsuario(usuario);
-			System.out.println("el correo es" + usu.getEmail());
-			this.sendEmailWithAttachment(usu.getEmail());
+			System.out.println("el correo es" + usu.getUsuario());
+			this.sendEmailWithAttachment(usu.getUsuario());
 			GenericResponse res = new GenericResponse();
 			res.setCodigo(200);
 			res.setMensaje("Correo enviado con exito");

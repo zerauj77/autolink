@@ -3,7 +3,11 @@ package com.autolink;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.autolink.controller.AseguradoraController;
+import com.autolink.controller.AutoController;
 import com.autolink.controller.LoginController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
@@ -14,6 +18,16 @@ public class RepuestosApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RepuestosApplication.class, args);
 	}
+	
+	public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:9000");
+                registry.addMapping("/recover2").allowedOrigins("http://localhost:9000");
+            }
+        };
+    }
 	
 	@Bean
 	public LoginController loginController(){
@@ -28,6 +42,16 @@ public class RepuestosApplication {
 	@Bean
 	public TallerController tallerController(){
 		return new TallerController();
+	}
+	
+	@Bean
+	public AseguradoraController aseguradoraController(){
+		return new AseguradoraController();
+	}
+	
+	@Bean
+	public AutoController autoController(){
+		return new AutoController();
 	}
 
 }

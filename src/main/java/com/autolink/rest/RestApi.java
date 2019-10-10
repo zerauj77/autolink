@@ -5,18 +5,24 @@ import java.io.IOException;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.autolink.controller.AseguradoraController;
+import com.autolink.controller.AutoController;
 import com.autolink.controller.LoginController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
+import com.autolink.model.Aseguradora;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
+import com.autolink.request.UsuarioRequest;
 import com.autolink.responses.GenericResponse;
 import com.autolink.responses.LoginResponse;
 
@@ -33,6 +39,12 @@ public class RestApi {
 	@Autowired
 	TallerController tallerc;
 	
+	@Autowired
+	AseguradoraController asec;
+	
+	@Autowired
+	AutoController autoc;
+	
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
 	public LoginResponse getConfiguration(@RequestParam String user, @RequestParam String pass) {
 			return lgc.validate(user,pass);	
@@ -43,9 +55,14 @@ public class RestApi {
 			return lgc.recuperarPassword(user);
 	}
 	
-	@RequestMapping(value = {"/recove2r"}, method = RequestMethod.GET)
-	public GenericResponse recoverUser() throws MessagingException, IOException {
-			return lgc.recuperarPassword("PattyB");
+	@RequestMapping(value = {"/recover2"}, method = RequestMethod.GET)
+	public ResponseEntity<?> recoverUser() throws MessagingException, IOException {
+			return ResponseEntity.ok(userc.getAllUsers());
+	}
+	
+	@RequestMapping(value = {"/recover3"}, method = RequestMethod.GET)
+	public BodyBuilder recoverUser2() throws MessagingException, IOException {
+			return ResponseEntity.badRequest();
 	}
 	
 	
@@ -73,6 +90,11 @@ public class RestApi {
 			return userc.save();
 	}
 	
+	@RequestMapping(value = {"usuario/update"}, method = RequestMethod.PUT)
+	public Usuarios updateUser(@RequestBody UsuarioRequest usu) {
+			return userc.update(usu);
+	}
+	
 
 	@RequestMapping(value = {"taller/all"}, method = RequestMethod.GET)
 	public Iterable<Taller> getAllTalleres() {
@@ -82,6 +104,16 @@ public class RestApi {
 	@RequestMapping(value = {"taller/save"}, method = RequestMethod.POST)
 	public Taller save(@RequestBody Taller taller) {
 			return tallerc.save(taller);
+	}
+	
+	@RequestMapping(value = {"aseguradora/all"}, method = RequestMethod.GET)
+	public Iterable<Aseguradora> getAllAseguradora() {
+			return asec.getAllAseguradoraes();
+	}
+	
+	@RequestMapping(value = {"Aseguradora/save"}, method = RequestMethod.POST)
+	public Aseguradora save(@RequestBody Aseguradora taller) {
+			return asec.save(taller);
 	}
 	
 

@@ -6,38 +6,40 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "taller")
-public class Taller implements java.io.Serializable {
+@Table(name = "aseguradora")
+public class Aseguradora implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private BigDecimal id;
-	String nombre;
+	private String nombre;
 	private String usuariocrea;
 	private boolean estado;
 	private Date fechacreacion;
-	
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false, precision = 11, scale = 0)
 	public BigDecimal getId() {
 		return id;
 	}
+	
 	public void setId(BigDecimal id) {
 		this.id = id;
 	}
 	
-	@Column(name = "nombreTaller", length = 50)
+	@Column(name = "nombreaseguradora", length = 50)
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	@Column(name = "usuariocrea", length = 50)
 	public String getUsuariocrea() {
 		return usuariocrea;

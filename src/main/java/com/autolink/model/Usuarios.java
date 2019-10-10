@@ -1,6 +1,7 @@
 package com.autolink.model;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +21,10 @@ public class Usuarios implements java.io.Serializable {
 	private String usuario;
 	private String nombre;
 	private String pass;
-	private String email;
 	private TipoUsuario tipo;
-	
+	private String usuariocrea;
+	private boolean estado;
+	private Date fechacreacion;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,14 +64,7 @@ public class Usuarios implements java.io.Serializable {
 		this.pass = contra;
 	}
 	
-	@Column(name = "email", length = 50)
-	public String getEmail() {
-		return email;
-	}
 	
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	@ManyToOne
 	@JoinColumn(name = "idtipo",insertable=true, updatable=false)
@@ -80,5 +75,35 @@ public class Usuarios implements java.io.Serializable {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
+
+	@Column(name = "usuariocrea", length = 50)
+	public String getUsuariocrea() {
+		return usuariocrea;
+	}
+
+	public void setUsuariocrea(String usuariocrea) {
+		this.usuariocrea = usuariocrea;
+	}
+
+	@Column(name = "estado")
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	
+	@Column(name = "fechacreacion")
+	public Date getFechacreacion() {
+		return fechacreacion;
+	}
+
+	public void setFechacreacion(Date fechacreacion) {
+		this.fechacreacion = fechacreacion;
+	}
+	
+	
 	
 }
