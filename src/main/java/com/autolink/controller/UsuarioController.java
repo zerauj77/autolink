@@ -62,7 +62,16 @@ public class UsuarioController {
 		if(usuario.getUsuariocrea() != null) {
 			usu.setUsuariocrea(usuario.getUsuariocrea());
 		}
-		usu.setEstado(usuario.isEstado());
+		if(usuario.getTipo() != null) {
+			usu.setTipo(usuario.getTipo());
+		}
+		return usuarioRepository.save(usu);
+		
+	}
+	
+	public Usuarios changeEstado(String usuario, boolean estado){
+		Usuarios usu = usuarioRepository.findByUsuario(usuario);
+		usu.setEstado(estado);
 		return usuarioRepository.save(usu);
 		
 	}

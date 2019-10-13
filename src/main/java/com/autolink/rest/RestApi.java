@@ -112,6 +112,12 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"usuario/status"}, method = RequestMethod.POST)
+	public Usuarios changeEstateUsuario(@RequestBody String usuario,@RequestBody boolean estado) {
+			return userc.changeEstado(usuario, estado);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/all"}, method = RequestMethod.GET)
 	public Iterable<Taller> getAllTalleres() {
 			return tallerc.getAllTalleres();
@@ -121,6 +127,12 @@ public class RestApi {
 	@RequestMapping(value = {"taller/save"}, method = RequestMethod.POST)
 	public Taller save(@RequestBody Taller taller) {
 			return tallerc.save(taller);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"taller/status"}, method = RequestMethod.POST)
+	public Taller changeEstateTaller(@RequestBody String taller,@RequestBody boolean estado) {
+			return tallerc.changeEstado(taller, estado);
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
