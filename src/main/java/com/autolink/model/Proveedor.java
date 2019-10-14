@@ -11,18 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipousuario")
-public class TipoUsuario implements java.io.Serializable {
+@Table(name = "proveedor")
+public class Proveedor implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private BigDecimal id;
 	private String nombre;
+	private String 	direccion;
+	private String usuariocrea;
 	private boolean estado;
 	private Date fechacreacion;
-	private String usuariocrea;
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false, precision = 11, scale = 0)
@@ -34,7 +33,7 @@ public class TipoUsuario implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "nombretipo", length = 50,unique = true)
+	@Column(name = "nombreproveedor", length = 50,unique = true)
 	public String getNombre() {
 		return nombre;
 	}
@@ -42,6 +41,14 @@ public class TipoUsuario implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 	
+	@Column(name = "direccion", length = 200)
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	@Column(name = "usuariocrea", length = 50)
 	public String getUsuariocrea() {
 		return usuariocrea;
@@ -69,11 +76,5 @@ public class TipoUsuario implements java.io.Serializable {
 	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
-
-	
-	
-	
-	
-	
 
 }

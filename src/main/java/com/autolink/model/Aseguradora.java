@@ -32,7 +32,7 @@ public class Aseguradora implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "nombreaseguradora", length = 50)
+	@Column(name = "nombreaseguradora", length = 50,unique = true)
 	public String getNombre() {
 		return nombre;
 	}

@@ -143,8 +143,14 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"Aseguradora/save"}, method = RequestMethod.POST)
-	public Aseguradora save(@RequestBody Aseguradora taller) {
-			return asec.save(taller);
+	public Aseguradora save(@RequestBody Aseguradora aseguradora) {
+			return asec.save(aseguradora);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"aseguradora/status"}, method = RequestMethod.POST)
+	public Aseguradora changeStatusAseguradora(@RequestBody String aseguradora,@RequestBody boolean estado) {
+			return asec.changeEstado(aseguradora, estado);
 	}
 	
 

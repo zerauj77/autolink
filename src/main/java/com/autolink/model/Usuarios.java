@@ -37,7 +37,7 @@ public class Usuarios implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "user", length = 50)
+	@Column(name = "user", length = 50,unique = true)
 	public String getUsuario() {
 		return usuario;
 	}

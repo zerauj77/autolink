@@ -22,6 +22,8 @@ public class TallerController {
 		return tallerRepository.findByNombre(taller);
 	}
 	
+	
+	
 	public Taller changeEstado(String taller, boolean estado){
 		Taller ta = this.findByTaller(taller);
 		ta.setEstado(estado);
