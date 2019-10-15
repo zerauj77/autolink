@@ -67,7 +67,7 @@ public class Usuarios implements java.io.Serializable {
 	
 
 	@ManyToOne
-	@JoinColumn(name = "idtipo",insertable=true, updatable=false)
+	@JoinColumn(name = "idtipo",insertable=true, updatable=true)
 	public TipoUsuario getTipo() {
 		return tipo;
 	}

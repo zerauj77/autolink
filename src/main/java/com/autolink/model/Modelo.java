@@ -48,7 +48,7 @@ public class Modelo implements java.io.Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idmarca",insertable=true, updatable=false)
+	@JoinColumn(name = "idmarca",insertable=true, updatable=true)
 	public Marca getMarca() {
 		return marca;
 	}

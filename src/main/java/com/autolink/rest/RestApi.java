@@ -1,6 +1,8 @@
 package com.autolink.rest;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.mail.MessagingException;
 
@@ -27,6 +29,7 @@ import com.autolink.model.Modelo;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
+import com.autolink.request.EstadoRequest;
 import com.autolink.responses.GenericResponse;
 import com.autolink.responses.LoginResponse;
 
@@ -114,9 +117,33 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"usuario/update2"}, method = RequestMethod.PUT)
+	public Usuarios updateUser2() {
+		Usuarios usu = new Usuarios();
+		Date date = new Date();
+		System.out.println(date.toString());
+		usu.setNombre("prueba1");
+		usu.setContra("prueba3");
+		usu.setUsuario("prueba4");
+		TipoUsuario tp = new TipoUsuario();
+		tp.setId(BigDecimal.ONE);
+		tp.setNombre("Admin");
+		usu.setTipo(tp);
+		usu.setUsuariocrea("michu2");
+		usu.setFechacreacion(date);
+		return userc.update(usu);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"usuario/status"}, method = RequestMethod.POST)
-	public Usuarios changeEstateUsuario(@RequestBody String usuario,@RequestBody boolean estado) {
-			return userc.changeEstado(usuario, estado);
+	public Usuarios changeEstateUsuario(@RequestBody EstadoRequest request) {
+			return userc.changeEstado(request.getNombre(), request.isEstado());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"usuario/status2"}, method = RequestMethod.GET)
+	public Usuarios changeEstateUsuario2(boolean estado) {
+			return userc.changeEstado("prueba4", estado);
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -133,8 +160,8 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/status"}, method = RequestMethod.POST)
-	public Taller changeEstateTaller(@RequestBody String taller,@RequestBody boolean estado) {
-			return tallerc.changeEstado(taller, estado);
+	public Taller changeEstateTaller(@RequestBody EstadoRequest request) {
+			return tallerc.changeEstado(request.getNombre(), request.isEstado());
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -151,8 +178,8 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"aseguradora/status"}, method = RequestMethod.POST)
-	public Aseguradora changeStatusAseguradora(@RequestBody String aseguradora,@RequestBody boolean estado) {
-			return asec.changeEstado(aseguradora, estado);
+	public Aseguradora changeStatusAseguradora(@RequestBody EstadoRequest request) {
+			return asec.changeEstado(request.getNombre(), request.isEstado());
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -169,8 +196,8 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"marca	/status"}, method = RequestMethod.POST)
-	public Marca changeStatusMarca(@RequestBody String marca,@RequestBody boolean estado) {
-			return autoc.changeEstadoMarca(marca, estado);
+	public Marca changeStatusMarca(@RequestBody EstadoRequest request) {
+			return autoc.changeEstadoMarca(request.getNombre(), request.isEstado());
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -187,8 +214,8 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"modelo/status"}, method = RequestMethod.POST)
-	public Modelo changeStatusModelo(@RequestBody String modelo,@RequestBody boolean estado) {
-			return autoc.changeEstadoModelo(modelo, estado);
+	public Modelo changeStatusModelo(@RequestBody EstadoRequest request) {
+			return autoc.changeEstadoModelo(request.getNombre(), request.isEstado());
 	}
 	
 	

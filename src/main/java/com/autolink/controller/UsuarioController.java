@@ -32,19 +32,19 @@ public class UsuarioController {
 	}
 	
 	public Usuarios save(){
-		Usuarios usu = new Usuarios();
-		Date date = new Date();
-		System.out.println(date.toString());
-		usu.setNombre("prueba1");
-		usu.setContra("prueba3");
-		usu.setUsuario("prueba4");
-		TipoUsuario tp = new TipoUsuario();
-		tp.setId(BigDecimal.ONE);
-		tp.setNombre("Admin");
-		usu.setTipo(tp);
-		usu.setUsuariocrea("michu");
-		usu.setFechacreacion(date);
-		usu.setEstado(true);
+			Usuarios usu = new Usuarios();
+			Date date = new Date();
+			System.out.println(date.toString());
+			usu.setNombre("prueba1");
+			usu.setContra("prueba3");
+			usu.setUsuario("prueba4");
+			TipoUsuario tp = new TipoUsuario();
+			tp.setId(BigDecimal.ONE);
+			tp.setNombre("Admin");
+			usu.setTipo(tp);
+			usu.setUsuariocrea("michu");
+			usu.setFechacreacion(date);
+			usu.setEstado(true);
 		return usuarioRepository.save(usu);
 	}
 	
