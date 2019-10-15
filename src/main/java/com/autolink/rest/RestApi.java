@@ -22,6 +22,8 @@ import com.autolink.controller.LoginController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 import com.autolink.model.Aseguradora;
+import com.autolink.model.Marca;
+import com.autolink.model.Modelo;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
@@ -153,5 +155,41 @@ public class RestApi {
 			return asec.changeEstado(aseguradora, estado);
 	}
 	
-
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"marca/all"}, method = RequestMethod.GET)
+	public Iterable<Marca> getAllMarcas() {
+			return autoc.getAllMarcas();
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"marca/save"}, method = RequestMethod.POST)
+	public Marca save(@RequestBody Marca marca) {
+			return autoc.saveMarca(marca);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"marca	/status"}, method = RequestMethod.POST)
+	public Marca changeStatusMarca(@RequestBody String marca,@RequestBody boolean estado) {
+			return autoc.changeEstadoMarca(marca, estado);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"modelo/all"}, method = RequestMethod.GET)
+	public Iterable<Modelo> getAllModelos() {
+			return autoc.getAllModelos();
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"modelo/save"}, method = RequestMethod.POST)
+	public Modelo save(@RequestBody Modelo modelo) {
+			return autoc.saveModelo(modelo);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"modelo/status"}, method = RequestMethod.POST)
+	public Modelo changeStatusModelo(@RequestBody String modelo,@RequestBody boolean estado) {
+			return autoc.changeEstadoModelo(modelo, estado);
+	}
+	
+	
 }
