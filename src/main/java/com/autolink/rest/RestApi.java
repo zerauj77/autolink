@@ -21,11 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.autolink.controller.AseguradoraController;
 import com.autolink.controller.AutoController;
 import com.autolink.controller.LoginController;
+import com.autolink.controller.ProveedorController;
+import com.autolink.controller.RepuestoController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 import com.autolink.model.Aseguradora;
 import com.autolink.model.Marca;
 import com.autolink.model.Modelo;
+import com.autolink.model.Proveedor;
+import com.autolink.model.Repuestos;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
@@ -51,6 +55,12 @@ public class RestApi {
 	
 	@Autowired
 	AutoController autoc;
+	
+	@Autowired
+	ProveedorController proveedorc;
+	
+	@Autowired
+	RepuestoController repuestoc;
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -195,7 +205,7 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
-	@RequestMapping(value = {"marca	/status"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"marca/status"}, method = RequestMethod.POST)
 	public Marca changeStatusMarca(@RequestBody EstadoRequest request) {
 			return autoc.changeEstadoMarca(request.getNombre(), request.isEstado());
 	}
@@ -213,10 +223,63 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"modelo/update"}, method = RequestMethod.PUT)
+	public Modelo updateModelo(@RequestBody Modelo model) {
+			return autoc.updateModelo(model);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"modelo/status"}, method = RequestMethod.POST)
 	public Modelo changeStatusModelo(@RequestBody EstadoRequest request) {
 			return autoc.changeEstadoModelo(request.getNombre(), request.isEstado());
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"proveedor/all"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllProveedores() {
+			return ResponseEntity.ok(proveedorc.getAllproveedores());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"proveedor/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveProveedor(@RequestBody Proveedor prov) {
+			return ResponseEntity.ok(proveedorc.save(prov));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"proveedor/status"}, method = RequestMethod.POST)
+	public ResponseEntity<?> changeStatusProveedor(@RequestBody EstadoRequest request) {
+			return ResponseEntity.ok(proveedorc.changeEstado(request.getNombre(), request.isEstado()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"proveedor/update"}, method = RequestMethod.PUT)
+	public Proveedor updateProveedor(@RequestBody Proveedor prov) {
+			return proveedorc.update(prov);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"repuesto/all"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllRepuestos() {
+			return ResponseEntity.ok(proveedorc.getAllproveedores());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"repuesto/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveRepuestos(@RequestBody Repuestos prov) {
+			return ResponseEntity.ok(repuestoc.save(prov));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"repuesto/status"}, method = RequestMethod.POST)
+	public ResponseEntity<?> changeStatusRepuestos(@RequestBody EstadoRequest request) {
+			return ResponseEntity.ok(repuestoc.changeEstado(request.getNombre(), request.isEstado()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"repuesto/update"}, method = RequestMethod.PUT)
+	public Repuestos updateRepuesto(@RequestBody Repuestos prov) {
+			return repuestoc.update(prov);
+	}
 	
 }

@@ -58,9 +58,8 @@ public class LoginController {
 	
 	public GenericResponse recuperarPassword(String usuario) throws MessagingException, IOException {
 		try {
-			Usuarios usu = usuarioRepository.findByUsuario(usuario);
-			System.out.println("el correo es" + usu.getUsuario());
-			this.sendEmailWithAttachment(usu.getUsuario());
+			System.out.println("el correo es" + usuario);
+			this.sendEmailWithAttachment(usuario);
 			GenericResponse res = new GenericResponse();
 			res.setCodigo(200);
 			res.setMensaje("Correo enviado con exito");
@@ -80,17 +79,16 @@ public class LoginController {
 		
         helper.setTo(correo);
 
-        helper.setSubject("Reinicio de correo");
+        helper.setSubject("Reinicio de contraseña Autolink");
 
         // true = text/html
         helper.setText("<h1>haga click en el siguiente url</h1>", true);
-        helper.setText("Aqui colocar la url como para mandar un mensaje");
+        helper.setText("<a href='http://localhost:4200/resetContrasena'>http://localhost:4200/resetContrasena</a>");
+       
 
         javaMailSender.send(msg);
 		}catch(Exception ex) {
 			throw ex;
 		}
-
     }
-
 }

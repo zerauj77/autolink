@@ -8,26 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "modelo")
-public class Modelo implements java.io.Serializable {
+@Table(name = "respuesto")
+public class Repuestos implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private BigDecimal id;
 	private String nombre;
-	private Marca marca;
+	private BigDecimal 	valor;
 	private String usuariocrea;
 	private boolean estado;
 	private Date fechacreacion;
-	
-	
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false, precision = 11, scale = 0)
@@ -39,22 +33,22 @@ public class Modelo implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "nombremodelo", length = 50,unique = true)
+	@Column(name = "nombrerepuesto", length = 50,unique = true)
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	@ManyToOne
-	@JoinColumn(name = "idmarca",insertable=true, updatable=true)
-	public Marca getMarca() {
-		return marca;
+	
+	
+	@Column(name = "valor",precision = 11, scale = 0)
+	public BigDecimal getValor() {
+		return valor;
 	}
 
-	public void setMarca(Marca marca) {
-		this.marca = marca;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
 
 	@Column(name = "usuariocrea", length = 50)

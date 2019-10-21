@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.autolink.controller.AseguradoraController;
 import com.autolink.controller.AutoController;
 import com.autolink.controller.LoginController;
+import com.autolink.controller.ProveedorController;
+import com.autolink.controller.RepuestoController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 
@@ -52,6 +54,16 @@ public class RepuestosApplication {
 	@Bean
 	public AutoController autoController(){
 		return new AutoController();
+	}
+	
+	@Bean
+	public ProveedorController proveedorController(){
+		return new ProveedorController();
+	}
+	
+	@Bean
+	public RepuestoController repuestoController(){
+		return new RepuestoController();
 	}
 
 }
