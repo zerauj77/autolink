@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.AseguradoraRepository;
 import com.autolink.model.Aseguradora;
-import com.autolink.model.Taller;
 
 public class AseguradoraController {
 
@@ -28,6 +27,26 @@ public class AseguradoraController {
 		ase.setEstado(estado);
 		return aseguradoraRepository.save(ase);
 		
+	}
+	
+	public Aseguradora update(Aseguradora aseguradora){
+		Aseguradora ase = this.aseguradoraRepository.findByNombre(aseguradora.getNombre());
+		if(aseguradora.getIva() != null) {
+			ase.setIva(aseguradora.getIva());
+		}
+		if(aseguradora.getNit() != null) {
+			ase.setNit(aseguradora.getNit());
+		}
+		if(aseguradora.getRazonsocial() != null) {
+			ase.setRazonsocial(aseguradora.getRazonsocial());
+		}
+		if(aseguradora.getCargo() != null) {
+			ase.setCargo(aseguradora.getCargo());
+		}
+		if(aseguradora.getUsuario() != null) {
+			ase.setUsuario(aseguradora.getUsuario());
+		}
+		return aseguradoraRepository.save(ase);
 	}
 
 

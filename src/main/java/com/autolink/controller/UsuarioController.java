@@ -66,7 +66,6 @@ public class UsuarioController {
 			usu.setTipo(usuario.getTipo());
 		}
 		return usuarioRepository.save(usu);
-		
 	}
 	
 	public Usuarios changeEstado(String usuario, boolean estado){

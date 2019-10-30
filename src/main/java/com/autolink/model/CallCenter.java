@@ -12,22 +12,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "proveedor")
-public class Proveedor implements java.io.Serializable {
+@Table(name = "callcenter")
+public class CallCenter implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private BigDecimal id;
 	private String nombre;
-	private String 	direccion;
 	private String usuariocrea;
 	private boolean estado;
 	private Date fechacreacion;
 	private String razonsocial;
 	private String cargo;
-	private String nit;
 	private String telefono;
-	private String cuentabancaria;
 	private Usuarios usuario;
 
 	@Id
@@ -41,20 +39,12 @@ public class Proveedor implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "nombreproveedor", length = 50,unique = true)
+	@Column(name = "nombreempresa", length = 50,unique = true)
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	@Column(name = "direccion", length = 200)
-	public String getDireccion() {
-		return direccion;
-	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
 	}
 
 	@Column(name = "usuariocrea", length = 50)
@@ -103,15 +93,6 @@ public class Proveedor implements java.io.Serializable {
 		this.cargo = cargo;
 	}
 
-	@Column(name = "nit")
-	public String getNit() {
-		return nit;
-	}
-
-	public void setNit(String nit) {
-		this.nit = nit;
-	}
-
 	@Column(name = "telefono")
 	public String getTelefono() {
 		return telefono;
@@ -119,15 +100,6 @@ public class Proveedor implements java.io.Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	@Column(name = "cuentabancaria")
-	public String getCuentabancaria() {
-		return cuentabancaria;
-	}
-
-	public void setCuentabancaria(String cuentabancaria) {
-		this.cuentabancaria = cuentabancaria;
 	}
 	
 	@ManyToOne
@@ -139,5 +111,8 @@ public class Proveedor implements java.io.Serializable {
 	public void setUsuario(Usuarios usuario) {
 		this.usuario = usuario;
 	}
+	
+	
+
 
 }

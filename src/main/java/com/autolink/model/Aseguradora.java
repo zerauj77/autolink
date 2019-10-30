@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,11 @@ public class Aseguradora implements java.io.Serializable {
 	private String usuariocrea;
 	private boolean estado;
 	private Date fechacreacion;
+	private String razonsocial;
+	private String cargo;
+	private String nit;
+	private String iva;
+	private Usuarios usuario;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,5 +74,57 @@ public class Aseguradora implements java.io.Serializable {
 	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
+	
+	@Column(name = "razonsocial")
+	public String getRazonsocial() {
+		return razonsocial;
+	}
+
+	public void setRazonsocial(String razonsocial) {
+		this.razonsocial = razonsocial;
+	}
+
+	@Column(name = "cargo")
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	
+	@Column(name = "nit")
+	public String getNit() {
+		return nit;
+	}
+
+	public void setNit(String nit) {
+		this.nit = nit;
+	}
+
+	
+	@Column(name = "iva")
+	public String getIva() {
+		return iva;
+	}
+
+	public void setIva(String iva) {
+		this.iva = iva;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "idusuario",insertable=true, updatable=true)
+	public Usuarios getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuarios usuario) {
+		this.usuario = usuario;
+	}
+	
+	
+	
+	
 
 }

@@ -175,6 +175,12 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"taller/update"}, method = RequestMethod.PUT)
+	public Taller updateTaller(@RequestBody Taller prov) {
+			return tallerc.update(prov);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"aseguradora/all"}, method = RequestMethod.GET)
 	public Iterable<Aseguradora> getAllAseguradora() {
 			return asec.getAllAseguradoraes();
@@ -190,6 +196,12 @@ public class RestApi {
 	@RequestMapping(value = {"aseguradora/status"}, method = RequestMethod.POST)
 	public Aseguradora changeStatusAseguradora(@RequestBody EstadoRequest request) {
 			return asec.changeEstado(request.getNombre(), request.isEstado());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"aseguradora/update"}, method = RequestMethod.PUT)
+	public Aseguradora updateAseguradora(@RequestBody Aseguradora prov) {
+			return asec.update(prov);
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -261,7 +273,7 @@ public class RestApi {
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"repuesto/all"}, method = RequestMethod.GET)
 	public ResponseEntity<?> getAllRepuestos() {
-			return ResponseEntity.ok(proveedorc.getAllproveedores());
+			return ResponseEntity.ok(repuestoc.getAllrepuestoes());
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 

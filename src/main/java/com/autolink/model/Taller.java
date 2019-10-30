@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,10 @@ public class Taller implements java.io.Serializable {
 	private String usuariocrea;
 	private boolean estado;
 	private Date fechacreacion;
+	private String razonsocial;
+	private String cargo;
+	private String telefono;
+	private Usuarios usuario;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +71,43 @@ public class Taller implements java.io.Serializable {
 
 	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
+	}
+	
+	@Column(name = "razonsocial")
+	public String getRazonsocial() {
+		return razonsocial;
+	}
+
+	public void setRazonsocial(String razonsocial) {
+		this.razonsocial = razonsocial;
+	}
+
+	@Column(name = "cargo")
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	@Column(name = "telefono")
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "idusuario",insertable=true, updatable=true)
+	public Usuarios getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuarios usuario) {
+		this.usuario = usuario;
 	}
 
 }

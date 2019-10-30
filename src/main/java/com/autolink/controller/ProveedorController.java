@@ -23,6 +23,24 @@ public class ProveedorController {
 		if(proveedor.getDireccion() != null) {
 			prov.setDireccion(proveedor.getDireccion());
 		}
+		if(proveedor.getCargo() != null) {
+			prov.setCargo(proveedor.getCargo());
+		}
+		if(proveedor.getCuentabancaria() != null) {
+			prov.setCuentabancaria(proveedor.getCuentabancaria());
+		}
+		if(proveedor.getNit() != null) {
+			prov.setNit(proveedor.getNit());
+		}
+		if(proveedor.getRazonsocial() != null) {
+			prov.setRazonsocial(proveedor.getDireccion());
+		}
+		if(proveedor.getTelefono() != null) {
+			prov.setTelefono(proveedor.getTelefono());
+		}
+		if(proveedor.getUsuario() != null) {
+			prov.setUsuario(proveedor.getUsuario());
+		}
 		return proveedorRepository.save(prov);
 	}
 	
