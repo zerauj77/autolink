@@ -37,6 +37,9 @@ public class TallerController {
 		if(taller.getUsuario() != null) {
 			ta.setUsuario(taller.getUsuario());
 		}
+		if(taller.getDireccion() != null) {
+			ta.setDireccion(taller.getDireccion());
+		}
 		return tallerRepository.save(ta);
 	}
 	

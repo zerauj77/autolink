@@ -26,6 +26,7 @@ public class Taller implements java.io.Serializable {
 	private String cargo;
 	private String telefono;
 	private Usuarios usuario;
+	private String direccion;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,6 +99,15 @@ public class Taller implements java.io.Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	
+	@Column(name = "direccion")
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	
 	@ManyToOne

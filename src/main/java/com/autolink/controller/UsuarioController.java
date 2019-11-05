@@ -48,7 +48,11 @@ public class UsuarioController {
 		return usuarioRepository.save(usu);
 	}
 	
-	
+	public Iterable<Usuarios> getUsuariosXTipo(String nombreTipo) {
+		TipoUsuario tipo = this.getOneTipoUsuario(nombreTipo);
+		
+		return this.usuarioRepository.findByTipo(tipo);
+	}
 
 	
 	public Usuarios update(Usuarios usuario){

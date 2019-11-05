@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.autolink.controller.AseguradoraController;
 import com.autolink.controller.AutoController;
+import com.autolink.controller.CallCenterController;
 import com.autolink.controller.LoginController;
 import com.autolink.controller.ProveedorController;
 import com.autolink.controller.RepuestoController;
@@ -65,5 +66,11 @@ public class RepuestosApplication {
 	public RepuestoController repuestoController(){
 		return new RepuestoController();
 	}
+	
+	@Bean
+	public CallCenterController callCenterController(){
+		return new CallCenterController();
+	}
+
 
 }

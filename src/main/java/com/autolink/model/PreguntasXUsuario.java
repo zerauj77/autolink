@@ -15,7 +15,7 @@ public class PreguntasXUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private PreguntasXUsuarioKeys id;
 	private Preguntas preguntas;
-	private Usuarios usuario;
+	private Usuarios usuarios;
 	private String respuesta;
 	
 	@Id
@@ -38,11 +38,11 @@ public class PreguntasXUsuario implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "idusuario",insertable=false, updatable=false)
-	public Usuarios getUsuario() {
-		return usuario;
+	public Usuarios getUsuarios() {
+		return usuarios;
 	}
-	public void setUsuario(Usuarios usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(Usuarios usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	@Column(name = "respuesta")

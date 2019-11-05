@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.autolink.controller.AseguradoraController;
 import com.autolink.controller.AutoController;
+import com.autolink.controller.CallCenterController;
 import com.autolink.controller.LoginController;
 import com.autolink.controller.ProveedorController;
 import com.autolink.controller.RepuestoController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 import com.autolink.model.Aseguradora;
+import com.autolink.model.CallCenter;
 import com.autolink.model.Marca;
 import com.autolink.model.Modelo;
 import com.autolink.model.Proveedor;
@@ -61,6 +63,9 @@ public class RestApi {
 	
 	@Autowired
 	RepuestoController repuestoc;
+	
+	@Autowired
+	CallCenterController callc;
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -124,6 +129,12 @@ public class RestApi {
 	@RequestMapping(value = {"usuario/update"}, method = RequestMethod.PUT)
 	public Usuarios updateUser(@RequestBody Usuarios usu) {
 			return userc.update(usu);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"usuario/getByTipo"}, method = RequestMethod.POST)
+	public Iterable<Usuarios> updateUser(@RequestBody String tipoUsuario) {
+			return userc.getUsuariosXTipo(tipoUsuario);
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -293,5 +304,30 @@ public class RestApi {
 	public Repuestos updateRepuesto(@RequestBody Repuestos prov) {
 			return repuestoc.update(prov);
 	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"callcentee/all"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllCallCenter() {
+			return ResponseEntity.ok(callc.getAllCallCenteres());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"callcenter/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveCallCenter(@RequestBody CallCenter prov) {
+			return ResponseEntity.ok(callc.save(prov));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"callcenter/status"}, method = RequestMethod.POST)
+	public ResponseEntity<?> changeStatusCallCenter(@RequestBody EstadoRequest request) {
+			return ResponseEntity.ok(callc.changeEstado(request.getNombre(), request.isEstado()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"callcenter/update"}, method = RequestMethod.PUT)
+	public CallCenter updateCallcenter(@RequestBody CallCenter call) {
+			return callc.update(call);
+	}
+	
 	
 }

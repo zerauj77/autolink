@@ -83,7 +83,7 @@ public class LoginController {
 
         // true = text/html
         helper.setText("<h1>haga click en el siguiente url</h1>", true);
-        helper.setText("<a href='http://localhost:4200/resetContrasena'>http://localhost:4200/resetContrasena</a>");
+        helper.setText("<a href=\'http://localhost:4200/resetContrasena\'>http://localhost:4200/resetContrasena</a>");
        
 
         javaMailSender.send(msg);
