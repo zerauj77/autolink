@@ -30,12 +30,15 @@ import com.autolink.model.Aseguradora;
 import com.autolink.model.CallCenter;
 import com.autolink.model.Marca;
 import com.autolink.model.Modelo;
+import com.autolink.model.Preguntas;
+import com.autolink.model.PreguntasXUsuario;
 import com.autolink.model.Proveedor;
 import com.autolink.model.Repuestos;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
 import com.autolink.request.EstadoRequest;
+import com.autolink.request.PreguntasRequest;
 import com.autolink.responses.GenericResponse;
 import com.autolink.responses.LoginResponse;
 
@@ -328,6 +331,41 @@ public class RestApi {
 	public CallCenter updateCallcenter(@RequestBody CallCenter call) {
 			return callc.update(call);
 	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"preguntas/byUser"}, method = RequestMethod.GET)
+	public Iterable<PreguntasXUsuario> getAllPreguntas(@RequestParam BigDecimal id) {
+			return userc.getAllPreguntaXUsuario_ByUsuario(id);
+	}
+
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"preguntas/byUser2"}, method = RequestMethod.GET)
+	public Iterable<PreguntasXUsuario> getAllPreguntas2() {
+			return userc.getAllPreguntaXUsuario_ByUsuario(BigDecimal.ONE);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"preguntas/all"}, method = RequestMethod.GET)
+	public Iterable<Preguntas> getAllPreguntas() {
+			return userc.allPreguntas();
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"preguntas/save"}, method = RequestMethod.POST)
+	public PreguntasXUsuario SavePreguntasXUsuario(@RequestBody PreguntasRequest preguntas) {
+			return userc.savePreguntaXUsuario(preguntas.getIdPregunta(), preguntas.getIdUsuario(), preguntas.getRespuesta());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"preguntas/save2"}, method = RequestMethod.GET)
+	public PreguntasXUsuario SavePreguntasXUsuario2() {
+			return userc.savePreguntaXUsuario(BigDecimal.ONE, BigDecimal.ONE, "respuesta2");
+	}
+	
+	
+	
+	
 	
 	
 }

@@ -5,8 +5,13 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.autolink.interfaces.PreguntaRepository;
 import com.autolink.interfaces.TipoUsuarioRepository;
 import com.autolink.interfaces.UsuarioRepository;
+import com.autolink.interfaces.UsuarioXPreguntaRepository;
+import com.autolink.model.Preguntas;
+import com.autolink.model.PreguntasXUsuario;
+import com.autolink.model.PreguntasXUsuarioKeys;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
 
@@ -18,6 +23,12 @@ public class UsuarioController {
 	
 	@Autowired
 	TipoUsuarioRepository tpRepository;
+	
+	@Autowired
+	UsuarioXPreguntaRepository upRepository;
+	
+	@Autowired
+	PreguntaRepository pRepository;
 	
 	public Iterable<Usuarios> getAllUsers() {
 		return usuarioRepository.findAll();
@@ -79,6 +90,10 @@ public class UsuarioController {
 		
 	}
 	
+	public Iterable<Preguntas> allPreguntas() {
+		return pRepository.findAll();
+	}
+	
 	public TipoUsuario getOneTipoUsuario(String name) {
 		return tpRepository.findByNombre(name);
 	}
@@ -91,5 +106,36 @@ public class UsuarioController {
 		return tpRepository.findById(id).orElse(null);
 	}
 	
+	public Iterable<PreguntasXUsuario> getAllPreguntaXUsuario() {
+		return upRepository.findAll();
+	}
+	
+	public Iterable<PreguntasXUsuario> getAllPreguntaXUsuario_ByUsuario(BigDecimal id) {
+		return upRepository.findByUsuarios_Id(id);
+	}
+	
+	public PreguntasXUsuario savePreguntaXUsuario(BigDecimal idPregunta, BigDecimal idUsuario, String respuesta) {
+		Preguntas pre = this.preguntaById(idPregunta);
+		Usuarios usu = this.usuarioById(idUsuario);
+		PreguntasXUsuario pxu = new PreguntasXUsuario();
+		PreguntasXUsuarioKeys pxuk = new PreguntasXUsuarioKeys();
+		pxuk.setIdPregunta(idPregunta);
+		pxuk.setIdUsuarios(idUsuario);
+		pxu.setId(pxuk);
+		pxu.setPreguntas(pre);
+		pxu.setRespuesta(respuesta);
+		pxu.setUsuarios(usu);
+		return upRepository.save(pxu);
+		
+		
+	}
+
+	public Preguntas preguntaById(BigDecimal id) {
+		return pRepository.findById(id).orElse(null);
+	}
+	
+	public Usuarios usuarioById(BigDecimal id) {
+		return usuarioRepository.findById(id).orElse(null);
+	}
 	
 }
