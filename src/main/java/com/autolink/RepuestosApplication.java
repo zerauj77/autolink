@@ -12,6 +12,7 @@ import com.autolink.controller.CallCenterController;
 import com.autolink.controller.LoginController;
 import com.autolink.controller.ProveedorController;
 import com.autolink.controller.RepuestoController;
+import com.autolink.controller.SolicitudController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 
@@ -72,5 +73,10 @@ public class RepuestosApplication {
 		return new CallCenterController();
 	}
 
+	
+	@Bean
+	public SolicitudController solicitudController(){
+		return new SolicitudController();
+	}
 
 }

@@ -24,6 +24,7 @@ import com.autolink.controller.CallCenterController;
 import com.autolink.controller.LoginController;
 import com.autolink.controller.ProveedorController;
 import com.autolink.controller.RepuestoController;
+import com.autolink.controller.SolicitudController;
 import com.autolink.controller.TallerController;
 import com.autolink.controller.UsuarioController;
 import com.autolink.model.Aseguradora;
@@ -34,6 +35,7 @@ import com.autolink.model.Preguntas;
 import com.autolink.model.PreguntasXUsuario;
 import com.autolink.model.Proveedor;
 import com.autolink.model.Repuestos;
+import com.autolink.model.Solicitud;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
@@ -69,6 +71,9 @@ public class RestApi {
 	
 	@Autowired
 	CallCenterController callc;
+	
+	@Autowired
+	SolicitudController solc;
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -309,7 +314,7 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
-	@RequestMapping(value = {"callcentee/all"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"callcenter/all"}, method = RequestMethod.GET)
 	public ResponseEntity<?> getAllCallCenter() {
 			return ResponseEntity.ok(callc.getAllCallCenteres());
 	}
@@ -360,7 +365,50 @@ public class RestApi {
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"preguntas/save2"}, method = RequestMethod.GET)
 	public PreguntasXUsuario SavePreguntasXUsuario2() {
-			return userc.savePreguntaXUsuario(BigDecimal.ONE, BigDecimal.ONE, "respuesta2");
+			return userc.savePreguntaXUsuario(BigDecimal.valueOf(2), BigDecimal.valueOf(2), "respuesta5");
+	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/all"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllSolicitud() {
+			return ResponseEntity.ok(solc.getAllSolicitud());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveSolicitud(@RequestBody Solicitud prov) {
+			return ResponseEntity.ok(solc.save(prov));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/code"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getSolicitudCode() {
+			return ResponseEntity.ok(solc.generateSolicud());
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/repuesto"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getSolicitudXRepuestoAll(@RequestParam BigDecimal id) {
+			return ResponseEntity.ok(solc.getAllRepuestoXSolicitudBySolicitud(id));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/foto"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getSolicitudXfotoAll(@RequestParam BigDecimal id) {
+			return ResponseEntity.ok(solc.getAllFotosXSolicitud(id));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/bycode"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getSolicitudByCode(@RequestParam String code) {
+			return ResponseEntity.ok(solc.getOneSolicitudByCode(code));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/byEstado"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getSolicitudByEstado(@RequestParam String estado) {
+			return ResponseEntity.ok(solc.getByEstado(estado));
 	}
 	
 	
