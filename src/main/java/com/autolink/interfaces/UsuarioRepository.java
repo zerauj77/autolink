@@ -13,4 +13,5 @@ public interface UsuarioRepository extends CrudRepository<Usuarios, BigDecimal> 
 	public Usuarios findByUsuario(String usuario);
 	public Iterable<Usuarios> findByTipo(TipoUsuario idTipo);
 
+
 }

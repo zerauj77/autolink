@@ -38,6 +38,10 @@ public class UsuarioController {
 		return usuarioRepository.findByNombre(usuario);
 	}
 	
+	public Usuarios getOneUserByUser(String user){
+		return usuarioRepository.findByUsuario(user);
+	}
+	
 	public Usuarios save(Usuarios usu){
 		return usuarioRepository.save(usu);
 	}

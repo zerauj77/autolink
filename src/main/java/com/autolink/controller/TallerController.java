@@ -3,7 +3,6 @@ package com.autolink.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.TallerRepository;
-import com.autolink.model.Aseguradora;
 import com.autolink.model.Taller;
 import com.autolink.model.Usuarios;
 
@@ -21,6 +20,10 @@ public class TallerController {
 	
 	public Taller findByTaller(String taller){
 		return tallerRepository.findByNombre(taller);
+	}
+	
+	public Taller findByUsuario(Usuarios usuario) {
+		return tallerRepository.findByUsuario(usuario);
 	}
 	
 	public Taller update(Taller taller){

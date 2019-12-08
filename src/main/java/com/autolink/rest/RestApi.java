@@ -40,7 +40,9 @@ import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
 import com.autolink.request.EstadoRequest;
+import com.autolink.request.FilesRequest;
 import com.autolink.request.PreguntasRequest;
+import com.autolink.request.RepuestoXSolicitudRequest;
 import com.autolink.responses.GenericResponse;
 import com.autolink.responses.LoginResponse;
 
@@ -114,6 +116,12 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"usuario/one"}, method = RequestMethod.GET)
+	public Usuarios getbyUser(@RequestParam String user) {
+			return userc.getOneUserByUser(user);
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"usuarioType/all"}, method = RequestMethod.GET)
 	public Iterable<TipoUsuario> getUsersByTipo() {
 			return userc.getAllTipoUsuario();
@@ -179,6 +187,12 @@ public class RestApi {
 	@RequestMapping(value = {"taller/all"}, method = RequestMethod.GET)
 	public Iterable<Taller> getAllTalleres() {
 			return tallerc.getAllTalleres();
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"taller/byUser"}, method = RequestMethod.GET)
+	public Taller getAllTalleresByUsuario(Usuarios usuario) {
+			return tallerc.findByUsuario(usuario);
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -400,6 +414,12 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/foto/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveSolicitudXfoto(@RequestBody FilesRequest dr) throws Exception {
+			return ResponseEntity.ok(solc.saveFotoXSolicitud(dr));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"solicitud/bycode"}, method = RequestMethod.GET)
 	public ResponseEntity<?> getSolicitudByCode(@RequestParam String code) {
 			return ResponseEntity.ok(solc.getOneSolicitudByCode(code));
@@ -411,9 +431,23 @@ public class RestApi {
 			return ResponseEntity.ok(solc.getByEstado(estado));
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/repuesto/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveSolicitudRepuesto(@RequestBody RepuestoXSolicitudRequest rsr) {
+			return ResponseEntity.ok(solc.saveRepuestoxSolicitud(rsr));
+	}
 	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/repuesto/update"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateSolicitudRepuesto(@RequestBody RepuestoXSolicitudRequest rsr) {
+			return ResponseEntity.ok(solc.updateRepuestoxSolicitud(rsr));
+	}
 	
-	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/repuesto/aplica"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> aplicaSolicitudRepuesto(@RequestBody RepuestoXSolicitudRequest rsr) {
+			return ResponseEntity.ok(solc.changeAplicaRepuestoxSolicitud(rsr));
+	}
 	
 	
 }
