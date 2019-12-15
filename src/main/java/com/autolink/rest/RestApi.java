@@ -148,8 +148,8 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
-	@RequestMapping(value = {"usuario/getByTipo"}, method = RequestMethod.POST)
-	public Iterable<Usuarios> updateUser(@RequestBody String tipoUsuario) {
+	@RequestMapping(value = {"usuario/getByTipo"}, method = RequestMethod.GET)
+	public Iterable<Usuarios> updateUser(@RequestParam String tipoUsuario) {
 			return userc.getUsuariosXTipo(tipoUsuario);
 	}
 	
@@ -191,7 +191,7 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/byUser"}, method = RequestMethod.GET)
-	public Taller getAllTalleresByUsuario(Usuarios usuario) {
+	public Taller getAllTalleresByUsuario(String usuario) {
 			return tallerc.findByUsuario(usuario);
 	}
 	

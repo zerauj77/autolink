@@ -10,6 +10,9 @@ public class TallerController {
 	@Autowired
 	TallerRepository tallerRepository;
 	
+	@Autowired
+	UsuarioController usuc;
+	
 	public Iterable<Taller> getAllTalleres() {
 		return tallerRepository.findAll();
 	}
@@ -22,8 +25,9 @@ public class TallerController {
 		return tallerRepository.findByNombre(taller);
 	}
 	
-	public Taller findByUsuario(Usuarios usuario) {
-		return tallerRepository.findByUsuario(usuario);
+	public Taller findByUsuario(String usuario) {
+		Usuarios usu = usuc.getOneUser(usuario);
+		return tallerRepository.findByUsuario(usu);
 	}
 	
 	public Taller update(Taller taller){
