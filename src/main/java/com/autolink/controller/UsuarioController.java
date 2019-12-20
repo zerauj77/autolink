@@ -63,10 +63,14 @@ public class UsuarioController {
 		return usuarioRepository.save(usu);
 	}
 	
-	public Iterable<Usuarios> getUsuariosXTipo(String nombreTipo) {
+	public Iterable<Usuarios> getUsuariosXTipo(String nombreTipo) throws Exception {
 		TipoUsuario tipo = this.getOneTipoUsuario(nombreTipo);
+		if(tipo == null) {
+			throw new Exception("No existe ese Tipo de Usuario");
+		}else {
+			return this.usuarioRepository.findByTipo(tipo);
+		}
 		
-		return this.usuarioRepository.findByTipo(tipo);
 	}
 
 	

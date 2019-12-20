@@ -25,9 +25,14 @@ public class TallerController {
 		return tallerRepository.findByNombre(taller);
 	}
 	
-	public Taller findByUsuario(String usuario) {
-		Usuarios usu = usuc.getOneUser(usuario);
-		return tallerRepository.findByUsuario(usu);
+	public Taller findByUsuario(String usuario) throws Exception {
+		Usuarios usu = usuc.getOneUserByUser(usuario);
+		if(usu == null) {
+			throw new Exception("No existe el Usuario seleccionado");
+		}else {
+			return tallerRepository.findByUsuario(usu);
+		}
+		
 	}
 	
 	public Taller update(Taller taller){

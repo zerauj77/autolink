@@ -149,8 +149,13 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"usuario/getByTipo"}, method = RequestMethod.GET)
-	public Iterable<Usuarios> updateUser(@RequestParam String tipoUsuario) {
-			return userc.getUsuariosXTipo(tipoUsuario);
+	public Iterable<Usuarios> updateUser(@RequestParam String tipoUsuario) throws Exception{
+		Iterable<Usuarios> users = 	userc.getUsuariosXTipo(tipoUsuario);
+		if(users == null) {
+			throw new Exception("No existen Usuarios con ese tipo de Usuario");
+		}else {
+			return users;
+		}
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -191,19 +196,24 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/byUser"}, method = RequestMethod.GET)
-	public Taller getAllTalleresByUsuario(String usuario) {
-			return tallerc.findByUsuario(usuario);
+	public Taller getAllTalleresByUsuario(String usuario) throws Exception {
+		Taller	ta = tallerc.findByUsuario(usuario);
+		if(ta == null) {
+			throw new Exception("No existe un taller asignado a ese Usuario");
+		}else {
+			return ta;
+		}
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/save"}, method = RequestMethod.POST)
-	public Taller save(@RequestBody Taller taller) {
+	public Taller save(@RequestBody Taller taller) throws Exception {
 			return tallerc.save(taller);
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/status"}, method = RequestMethod.POST)
-	public Taller changeEstateTaller(@RequestBody EstadoRequest request) {
+	public Taller changeEstateTaller(@RequestBody EstadoRequest request) throws Exception {
 			return tallerc.changeEstado(request.getNombre(), request.isEstado());
 	}
 	
