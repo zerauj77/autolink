@@ -196,7 +196,7 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/byUser"}, method = RequestMethod.GET)
-	public Taller getAllTalleresByUsuario(String usuario) throws Exception {
+	public Taller getAllTalleresByUsuario(@RequestParam String usuario) throws Exception {
 		Taller	ta = tallerc.findByUsuario(usuario);
 		if(ta == null) {
 			throw new Exception("No existe un taller asignado a ese Usuario");

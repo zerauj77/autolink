@@ -34,7 +34,7 @@ public class Solicitud implements java.io.Serializable {
 		String estado;
 		String comentariosTaller;
 		String comentariosAseguradora;
-		String comentariosAprovadores;
+		String comentariosproveedores;
 		Date fechaInicio;
 		Date fechaFin;
 		
@@ -199,13 +199,13 @@ public class Solicitud implements java.io.Serializable {
 			this.comentariosAseguradora = comentariosAseguradora;
 		}
 		
-		@Column(name = "comentariosaprovadores", length = 10000,unique = true)
-		public String getComentariosAprovadores() {
-			return comentariosAprovadores;
+		@Column(name = "comentariosproveedores", length = 10000,unique = true)
+		public String getComentariosProveedores() {
+			return comentariosproveedores;
 		}
 		
-		public void setComentariosAprovadores(String comentariosAprovadores) {
-			this.comentariosAprovadores = comentariosAprovadores;
+		public void setComentariosProveedores(String comentariosproveedores) {
+			this.comentariosproveedores = comentariosproveedores;
 		}
 		
 		@Column(name = "fechainicio",unique = true)
