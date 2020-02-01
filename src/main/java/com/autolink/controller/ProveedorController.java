@@ -1,5 +1,7 @@
 package com.autolink.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.ProveedorRepository;
@@ -46,6 +48,10 @@ public class ProveedorController {
 	
 	public Proveedor findByproveedor(String proveedor){
 		return proveedorRepository.findByNombre(proveedor);
+	}
+	
+	public Proveedor findByproveedorById(BigDecimal id){
+		return proveedorRepository.findById(id).orElse(null);
 	}
 	
 	public Proveedor changeEstado(String proveedor, boolean estado){

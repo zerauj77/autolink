@@ -1,5 +1,7 @@
 package com.autolink.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.TallerRepository;
@@ -23,6 +25,10 @@ public class TallerController {
 	
 	public Taller findByTaller(String taller){
 		return tallerRepository.findByNombre(taller);
+	}
+	
+	public Taller findTallerById(BigDecimal id){
+		return tallerRepository.findById(id).orElse(null);
 	}
 	
 	public Taller findByUsuario(String usuario) throws Exception {
@@ -52,6 +58,9 @@ public class TallerController {
 		if(taller.getDireccion() != null) {
 			ta.setDireccion(taller.getDireccion());
 		}
+		if(taller.getNombre() != null) {
+			ta.setNombre(taller.getNombre());
+		}
 		return tallerRepository.save(ta);
 	}
 	
@@ -61,5 +70,7 @@ public class TallerController {
 		return tallerRepository.save(ta);
 		
 	}
+	
+	
 
 }

@@ -122,6 +122,17 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"usuario/byId"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getUsuarioById(BigDecimal id) {
+		Usuarios resp = userc.getOneUserById(id);	
+		if(resp == null){
+				return ResponseEntity.notFound().build();
+		}else {
+				return ResponseEntity.ok(resp);
+		}
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"usuarioType/all"}, method = RequestMethod.GET)
 	public Iterable<TipoUsuario> getUsersByTipo() {
 			return userc.getAllTipoUsuario();
@@ -197,6 +208,7 @@ public class RestApi {
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/byUser"}, method = RequestMethod.GET)
 	public Taller getAllTalleresByUsuario(@RequestParam String usuario) throws Exception {
+		
 		Taller	ta = tallerc.findByUsuario(usuario);
 		if(ta == null) {
 			throw new Exception("No existe un taller asignado a ese Usuario");
@@ -227,6 +239,17 @@ public class RestApi {
 	@RequestMapping(value = {"aseguradora/all"}, method = RequestMethod.GET)
 	public Iterable<Aseguradora> getAllAseguradora() {
 			return asec.getAllAseguradoraes();
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"aseguradora/byId"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAseguradoraById(BigDecimal id) {
+		Aseguradora resp = asec.findByaseguradoraById(id);	
+		if(resp == null){
+				return ResponseEntity.notFound().build();
+		}else {
+				return ResponseEntity.ok(resp);
+		}
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -436,6 +459,12 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/update"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> getSolicitudByCode(@RequestParam Solicitud solicitud) {
+			return ResponseEntity.ok(solc.update(solicitud));
+	}
+		
+	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"solicitud/byEstado"}, method = RequestMethod.GET)
 	public ResponseEntity<?> getSolicitudByEstado(@RequestParam String estado) {
 			return ResponseEntity.ok(solc.getByEstado(estado));
@@ -446,6 +475,8 @@ public class RestApi {
 	public ResponseEntity<?> saveSolicitudRepuesto(@RequestBody RepuestoXSolicitudRequest rsr) {
 			return ResponseEntity.ok(solc.saveRepuestoxSolicitud(rsr));
 	}
+	
+	
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"solicitud/repuesto/update"}, method = RequestMethod.PUT)

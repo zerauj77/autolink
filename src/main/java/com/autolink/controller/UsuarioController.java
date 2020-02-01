@@ -38,6 +38,10 @@ public class UsuarioController {
 		return usuarioRepository.findByNombre(usuario);
 	}
 	
+	public Usuarios getOneUserById(BigDecimal id){
+		return usuarioRepository.findById(id).orElse(null);
+	}
+	
 	public Usuarios getOneUserByUser(String user){
 		return usuarioRepository.findByUsuario(user);
 	}
@@ -87,6 +91,9 @@ public class UsuarioController {
 		}
 		if(usuario.getTipo() != null) {
 			usu.setTipo(usuario.getTipo());
+		}
+		if(usuario.getNombre() != null) {
+			usu.setUsuario(usuario.getUsuario());
 		}
 		return usuarioRepository.save(usu);
 	}

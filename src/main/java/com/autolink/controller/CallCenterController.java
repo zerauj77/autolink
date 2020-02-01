@@ -1,5 +1,7 @@
 package com.autolink.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.CallCenterRepository;
@@ -20,6 +22,10 @@ public class CallCenterController {
 	
 	public CallCenter findBycallCenter(String callCenter){
 		return callCenterRepository.findByNombre(callCenter);
+	}
+	
+	public CallCenter findBycallCenterId(BigDecimal id){
+		return callCenterRepository.findById(id).orElse(null);
 	}
 	
 	public CallCenter changeEstado(String callCenter, boolean estado){

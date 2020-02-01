@@ -59,6 +59,34 @@ public class SolicitudController {
 		return solRepository.save(usu);
 	}
 	
+	public Solicitud update(Solicitud usu) {
+		if(solRepository.existsById(usu.getId())) {
+			Solicitud sol = solRepository.findById(usu.getId()).orElse(new Solicitud());
+			if(sol.getComentariosAseguradora() != null) {
+				sol.setComentariosAseguradora(usu.getComentariosAseguradora());
+			}
+			if(sol.getComentariosProveedores() != null) {
+				sol.setComentariosProveedores(usu.getComentariosProveedores());
+			}
+			
+			if(sol.getComentariosTaller() != null) {
+				sol.setComentariosTaller(usu.getComentariosTaller());
+			}
+			if(sol.getEstado() != null) {
+				sol.setEstado(usu.getEstado());
+			}
+			if(sol.getFechaInicio() != null) {
+				sol.setFechaInicio(usu.getFechaInicio());
+			}
+			if(sol.getFechaFin() != null) {
+				sol.setFechaFin(usu.getFechaFin());
+			}
+			return sol;
+		}else
+			return new Solicitud();
+			
+	}
+	
 	public Iterable<Solicitud> getByEstado(String estado){
 		return solRepository.findByEstado(estado);	
 	}
@@ -111,7 +139,7 @@ public class SolicitudController {
 	        try {
 	            // Check if the file's name contains invalid characters
 	            if(fileName.contains("..")) {
-	                throw new FileUploadException("Sorry! Filename contains invalid path sequence " + fileName);
+	                throw new FileUploadException("El siguiente archivo tiene caracteres invalidos " + fileName);
 	            }
 	            Solicitud sol = this.getOneSolicitudByCode(file.getCodigoSolicitud());
 	            
@@ -121,7 +149,7 @@ public class SolicitudController {
 
 	            return fSRepository.save(dbFile);
 	        } catch (Exception ex) {
-	            throw new Exception("Could not store file " + fileName + ". Please try again!", ex);
+	            throw new Exception("No se puede guardar el archivo " + fileName + ". Intente nuevamente! Ex:", ex);
 	        }
 	    }
 
@@ -143,6 +171,10 @@ public class SolicitudController {
 	    
 	    public Iterable<RepuestoXSolicitud> getRepuestoXSolicitudByIdSolicitud(BigDecimal id) {
 	        return rSRepository.findBySolicitud(id);
+	    }
+	    
+	    public Solicitud getSolicitudById(BigDecimal id) {
+	    	return solRepository.findById(id).orElse(null);
 	    }
 	
 	

@@ -1,5 +1,7 @@
 package com.autolink.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.MarcaRepository;
@@ -26,8 +28,16 @@ public class AutoController {
 		return marcaRepository.findByNombre(nombre);
 	}
 	
+	public Marca getByMarcaById(BigDecimal id){
+		return marcaRepository.findById(id).orElse(null);
+	}
+	
 	public Modelo getByModeloName(String nombre){
 		return modeloRepository.findByNombre(nombre);
+	}
+	
+	public Modelo getByModeloById(BigDecimal id){
+		return modeloRepository.findById(id).orElse(null);
 	}
 	
 	public Marca saveMarca(Marca usu){

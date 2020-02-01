@@ -1,5 +1,7 @@
 package com.autolink.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.AseguradoraRepository;
@@ -20,6 +22,11 @@ public class AseguradoraController {
 	
 	public Aseguradora findByaseguradora(String aseguradora){
 		return aseguradoraRepository.findByNombre(aseguradora);
+	}
+	
+	
+	public Aseguradora findByaseguradoraById(BigDecimal id){
+		return aseguradoraRepository.findById(id).orElse(null);
 	}
 	
 	public Aseguradora changeEstado(String aseguradora, boolean estado){
