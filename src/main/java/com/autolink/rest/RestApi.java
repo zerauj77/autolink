@@ -22,6 +22,7 @@ import com.autolink.controller.AseguradoraController;
 import com.autolink.controller.AutoController;
 import com.autolink.controller.CallCenterController;
 import com.autolink.controller.LoginController;
+import com.autolink.controller.OfertaProveedorController;
 import com.autolink.controller.ProveedorController;
 import com.autolink.controller.RepuestoController;
 import com.autolink.controller.SolicitudController;
@@ -31,6 +32,7 @@ import com.autolink.model.Aseguradora;
 import com.autolink.model.CallCenter;
 import com.autolink.model.Marca;
 import com.autolink.model.Modelo;
+import com.autolink.model.OfertaProveedor;
 import com.autolink.model.Preguntas;
 import com.autolink.model.PreguntasXUsuario;
 import com.autolink.model.Proveedor;
@@ -76,6 +78,11 @@ public class RestApi {
 	
 	@Autowired
 	SolicitudController solc;
+
+	
+	@Autowired
+	OfertaProveedorController opc;
+	
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -490,5 +497,24 @@ public class RestApi {
 			return ResponseEntity.ok(solc.changeAplicaRepuestoxSolicitud(rsr));
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/all"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllOfertas() {
+			return ResponseEntity.ok(opc.getAllOfertaProveedor());
+	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/bySolicitud"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getOfertasBySolicitud(@RequestParam BigDecimal id) {
+			return ResponseEntity.ok(opc.getAllOfertaProveedorBySolicitud(id));
+	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/save"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveOferta(@RequestBody OfertaProveedor oferta) {
+			return ResponseEntity.ok(opc.save(oferta));
+	}
 	
 }

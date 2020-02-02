@@ -10,6 +10,7 @@ import com.autolink.controller.AseguradoraController;
 import com.autolink.controller.AutoController;
 import com.autolink.controller.CallCenterController;
 import com.autolink.controller.LoginController;
+import com.autolink.controller.OfertaProveedorController;
 import com.autolink.controller.ProveedorController;
 import com.autolink.controller.RepuestoController;
 import com.autolink.controller.SolicitudController;
@@ -77,6 +78,11 @@ public class RepuestosApplication {
 	@Bean
 	public SolicitudController solicitudController(){
 		return new SolicitudController();
+	}
+	
+	@Bean
+	public OfertaProveedorController ofertaProveedorController(){
+		return new OfertaProveedorController();
 	}
 
 }
