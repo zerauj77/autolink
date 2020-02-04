@@ -41,10 +41,12 @@ import com.autolink.model.Solicitud;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
+import com.autolink.request.ComentariosRequest;
 import com.autolink.request.EstadoRequest;
 import com.autolink.request.FilesRequest;
 import com.autolink.request.PreguntasRequest;
 import com.autolink.request.RepuestoXSolicitudRequest;
+import com.autolink.request.SolicitudRequest;
 import com.autolink.responses.GenericResponse;
 import com.autolink.responses.LoginResponse;
 
@@ -467,8 +469,32 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"solicitud/update"}, method = RequestMethod.PUT)
-	public ResponseEntity<?> getSolicitudByCode(@RequestParam Solicitud solicitud) {
+	public ResponseEntity<?> updateSolicitud(@RequestParam Solicitud solicitud) {
 			return ResponseEntity.ok(solc.update(solicitud));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/updateEstado"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateSolicitudEstado(@RequestBody SolicitudRequest request) {
+			return ResponseEntity.ok(solc.updateEstado(request.getId(),request.getEstado()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/updateComentarioTaller"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateSolicitudCTaller(@RequestBody ComentariosRequest request) {
+			return ResponseEntity.ok(solc.updateComentarioTaller(request.getId(),request.getComentario()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/updateComentarioAseguradora"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateSolicitudCAseguradora(@RequestBody ComentariosRequest request) {
+			return ResponseEntity.ok(solc.updateComentarioAseguradora(request.getId(),request.getComentario()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/updateComentarioProveedor"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateSolicitudCProveedor(@RequestBody ComentariosRequest request) {
+			return ResponseEntity.ok(solc.updateComentarioProveedor(request.getId(),request.getComentario()));
 	}
 		
 	@CrossOrigin(origins="http://localhost:4200") 

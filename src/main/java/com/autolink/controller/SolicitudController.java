@@ -18,6 +18,7 @@ import com.autolink.model.Repuestos;
 import com.autolink.model.Solicitud;
 import com.autolink.request.FilesRequest;
 import com.autolink.request.RepuestoXSolicitudRequest;
+import com.autolink.responses.GenericResponse;
 
 public class SolicitudController {
 
@@ -84,6 +85,100 @@ public class SolicitudController {
 			return sol;
 		}else
 			return new Solicitud();
+			
+	}
+	
+	public GenericResponse updateEstado(BigDecimal id,String estado) {
+		GenericResponse resp = new GenericResponse();
+		if(solRepository.existsById(id)) {
+			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			
+			if(sol.getEstado() != null) {
+				sol.setEstado(estado);
+				solRepository.save(sol);
+				resp.setCodigo(500);
+				resp.setMensaje("Estado actualizado");
+				return resp;
+			}else {
+				resp.setCodigo(101);
+				resp.setMensaje("El estado no puede ser null");
+				return resp;
+			}
+		}else
+			resp.setCodigo(100);
+			resp.setMensaje("No existe esa solicitud");
+			return resp;
+			
+	}
+	
+	public GenericResponse updateComentarioTaller(BigDecimal id,String taller) {
+		GenericResponse resp = new GenericResponse();
+		if(solRepository.existsById(id)) {
+			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			
+			if(sol.getEstado() != null) {
+				sol.setComentariosTaller(taller);;
+				solRepository.save(sol);
+				resp.setCodigo(500);
+				resp.setMensaje("Comentario taller actualizado");
+				return resp;
+			}else {
+				resp.setCodigo(102);
+				resp.setMensaje("El comentario viene null");
+				return resp;
+			}
+		}else
+			resp.setCodigo(100);
+			resp.setMensaje("No existe esa solicitud");
+			return resp;
+			
+	}
+	
+	
+	public GenericResponse updateComentarioAseguradora(BigDecimal id,String aseguradora) {
+		GenericResponse resp = new GenericResponse();
+		if(solRepository.existsById(id)) {
+			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			
+			if(sol.getEstado() != null) {
+				sol.setComentariosAseguradora(aseguradora);
+				solRepository.save(sol);
+				resp.setCodigo(500);
+				resp.setMensaje("Comentario aseguradora actualizado");
+				return resp;
+			}else {
+				resp.setCodigo(103);
+				resp.setMensaje("El comentario viene null");
+				return resp;
+			}
+		}else
+			resp.setCodigo(100);
+			resp.setMensaje("No existe esa solicitud");
+			return resp;
+			
+	}
+	
+	
+	public GenericResponse updateComentarioProveedor(BigDecimal id,String proveedor) {
+		GenericResponse resp = new GenericResponse();
+		if(solRepository.existsById(id)) {
+			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			
+			if(sol.getEstado() != null) {
+				sol.setComentariosProveedores(proveedor);
+				solRepository.save(sol);
+				resp.setCodigo(500);
+				resp.setMensaje("Comentario proveedor actualizado");
+				return resp;
+			}else {
+				resp.setCodigo(104);
+				resp.setMensaje("El comentario viene null");
+				return resp;
+			}
+		}else
+			resp.setCodigo(100);
+			resp.setMensaje("No existe esa solicitud");
+			return resp;
 			
 	}
 	
