@@ -14,7 +14,7 @@ public interface RepuestoXSolicitudRepository extends CrudRepository<RepuestoXSo
 
 	
 	public Iterable<RepuestoXSolicitud> findBySolicitud(Solicitud solicitud);
-	public Iterable<RepuestoXSolicitud> findBySolicitud(BigDecimal id);
+	public Iterable<RepuestoXSolicitud> findBySolicitud_id(BigDecimal id);
 	public Iterable<RepuestoXSolicitud> findByRepuesto(BigDecimal id);
 	
 }

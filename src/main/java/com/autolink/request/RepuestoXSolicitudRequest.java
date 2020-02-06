@@ -5,18 +5,17 @@ import java.math.BigDecimal;
 public class RepuestoXSolicitudRequest implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String codigoSolicitud;
+	private BigDecimal id;
 	private BigDecimal idRepuesto;
 	private String estado;
 	private boolean aplica;
 
 
-	
-	public String getCodigoSolicitud() {
-		return codigoSolicitud;
+	public BigDecimal getId() {
+		return id;
 	}
-	public void setCodigoSolicitud(String codigoSolicitud) {
-		this.codigoSolicitud = codigoSolicitud;
+	public void setId(BigDecimal id) {
+		this.id = id;
 	}
 	public BigDecimal getIdRepuesto() {
 		return idRepuesto;

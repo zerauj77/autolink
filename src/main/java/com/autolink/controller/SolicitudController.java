@@ -45,7 +45,8 @@ public class SolicitudController {
 	}
 	
 	public Iterable<RepuestoXSolicitud> getAllRepuestoXSolicitudBySolicitud(BigDecimal id) {
-		return rSRepository.findBySolicitud(id);
+		Solicitud sol = solRepository.findById(id).orElse(null);
+		return rSRepository.findBySolicitud(sol);
 	}
 	
 	public Iterable<FotosXSolicitud> getAllFotosXSolicitud(BigDecimal id) {
@@ -189,7 +190,7 @@ public class SolicitudController {
 	
 	public RepuestoXSolicitud saveRepuestoxSolicitud(RepuestoXSolicitudRequest rsr) {
 		Repuestos r = this.getRepuesto(rsr.getIdRepuesto());
-		Solicitud s = this.getOneSolicitudByCode(rsr.getCodigoSolicitud());
+		Solicitud s = this.getSolicitudById(rsr.getId());
 		RepuestoXSolicitud rxs = new RepuestoXSolicitud();
 		RepuestoXSolicitudKeys keys = new RepuestoXSolicitudKeys();
 		keys.setIdrepuesto(rsr.getIdRepuesto());
@@ -204,7 +205,7 @@ public class SolicitudController {
 	}
 	
 	public RepuestoXSolicitud updateRepuestoxSolicitud(RepuestoXSolicitudRequest rsr) {
-		Solicitud s = this.getOneSolicitudByCode(rsr.getCodigoSolicitud());
+		Solicitud s = this.getSolicitudById(rsr.getId());
 		RepuestoXSolicitud rxs = new RepuestoXSolicitud();
 		RepuestoXSolicitudKeys keys = new RepuestoXSolicitudKeys();
 		keys.setIdrepuesto(rsr.getIdRepuesto());
@@ -217,12 +218,18 @@ public class SolicitudController {
 	}
 	
 	public RepuestoXSolicitud changeAplicaRepuestoxSolicitud(RepuestoXSolicitudRequest rsr) {
-		Solicitud s = this.getOneSolicitudByCode(rsr.getCodigoSolicitud());
+		Solicitud s = this.getSolicitudById(rsr.getId());
+		if(s == null) {
+			return new RepuestoXSolicitud();
+		}
 		RepuestoXSolicitud rxs = new RepuestoXSolicitud();
 		RepuestoXSolicitudKeys keys = new RepuestoXSolicitudKeys();
 		keys.setIdrepuesto(rsr.getIdRepuesto());
 		keys.setIdsolicitud(s.getId());
 		rxs = this.getRepuestoXSolicitudById(keys);
+		if(rxs == null) {
+			return new RepuestoXSolicitud();
+		}
 		rxs.setAplica(rsr.isAplica());
 		return rSRepository.save(rxs);
 	}
@@ -265,7 +272,7 @@ public class SolicitudController {
 	    }
 	    
 	    public Iterable<RepuestoXSolicitud> getRepuestoXSolicitudByIdSolicitud(BigDecimal id) {
-	        return rSRepository.findBySolicitud(id);
+	        return rSRepository.findBySolicitud_id(id);
 	    }
 	    
 	    public Solicitud getSolicitudById(BigDecimal id) {
