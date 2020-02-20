@@ -1,6 +1,7 @@
 package com.autolink.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ public class OfertaProveedor implements java.io.Serializable {
 	Proveedor idProveedor;
 	Integer cantidad;
 	String estado;
+	Date tiempoEntrega;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,6 +82,17 @@ public class OfertaProveedor implements java.io.Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+	
+	@Column(name = "tiempoEntrega", length = 50,unique = true)
+	public Date getTiempoEntrega() {
+		return tiempoEntrega;
+	}
+
+	public void setTiempoEntrega(Date tiempoEntrega) {
+		this.tiempoEntrega = tiempoEntrega;
+	}
+	
 	
 	
 

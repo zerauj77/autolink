@@ -6,6 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.autolink.interfaces.FotosXSolicitudRepository;
 import com.autolink.interfaces.RepuestoRepository;
@@ -188,9 +189,13 @@ public class SolicitudController {
 	}
 	
 	
+	
 	public RepuestoXSolicitud saveRepuestoxSolicitud(RepuestoXSolicitudRequest rsr) {
 		Repuestos r = this.getRepuesto(rsr.getIdRepuesto());
 		Solicitud s = this.getSolicitudById(rsr.getId());
+		if(s == null || r == null) {
+			return new RepuestoXSolicitud();
+		}
 		RepuestoXSolicitud rxs = new RepuestoXSolicitud();
 		RepuestoXSolicitudKeys keys = new RepuestoXSolicitudKeys();
 		keys.setIdrepuesto(rsr.getIdRepuesto());
@@ -206,11 +211,17 @@ public class SolicitudController {
 	
 	public RepuestoXSolicitud updateRepuestoxSolicitud(RepuestoXSolicitudRequest rsr) {
 		Solicitud s = this.getSolicitudById(rsr.getId());
+		if(s == null) {
+			return new RepuestoXSolicitud();
+		}
 		RepuestoXSolicitud rxs = new RepuestoXSolicitud();
 		RepuestoXSolicitudKeys keys = new RepuestoXSolicitudKeys();
 		keys.setIdrepuesto(rsr.getIdRepuesto());
 		keys.setIdsolicitud(s.getId());
 		rxs = this.getRepuestoXSolicitudById(keys);
+		if(rxs == null) {
+			return new RepuestoXSolicitud();
+		}
 		if(rsr.getEstado() != null) {
 			rxs.setEstado(rsr.getEstado());
 		}
@@ -279,5 +290,28 @@ public class SolicitudController {
 	    	return solRepository.findById(id).orElse(null);
 	    }
 	
-	
+
+		public FotosXSolicitud saveFotoXSolicitud2(MultipartFile file,BigDecimal id) throws Exception {
+	        // Normalize file name
+	        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+	        try {
+	            // Check if the file's name contains invalid characters
+	            if(fileName.contains("..")) {
+	                throw new FileUploadException("El siguiente archivo tiene caracteres invalidos " + fileName);
+	            }
+	            Solicitud sol = this.getSolicitudById(id);
+	            
+	            FotosXSolicitud dbFile = new FotosXSolicitud();
+	            dbFile.setFoto(file.getBytes());
+	            dbFile.setIdSolicitud(sol);
+
+	            return fSRepository.save(dbFile);
+	        } catch (Exception ex) {
+	            throw new Exception("No se puede guardar el archivo " + fileName + ". Intente nuevamente! Ex:", ex);
+	        }
+	    }
+
+	    
+	    
 }
