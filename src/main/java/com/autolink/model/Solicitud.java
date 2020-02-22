@@ -1,6 +1,7 @@
 package com.autolink.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -35,8 +36,8 @@ public class Solicitud implements java.io.Serializable {
 		String comentariosTaller;
 		String comentariosAseguradora;
 		String comentariosproveedores;
-		Date fechaInicio;
-		Date fechaFin;
+		LocalDateTime fechaInicio;
+		LocalDateTime fechaFin;
 		
 		
 		@Id
@@ -209,20 +210,20 @@ public class Solicitud implements java.io.Serializable {
 		}
 		
 		@Column(name = "fechainicio",unique = true)
-		public Date getFechaInicio() {
+		public LocalDateTime getFechaInicio() {
 			return fechaInicio;
 		}
 		
-		public void setFechaInicio(Date fechaInicio) {
+		public void setFechaInicio(LocalDateTime fechaInicio) {
 			this.fechaInicio = fechaInicio;
 		}
 		
 		@Column(name = "fechafin",unique = true)
-		public Date getFechaFin() {
+		public LocalDateTime getFechaFin() {
 			return fechaFin;
 		}
 		
-		public void setFechaFin(Date fechaFin) {
+		public void setFechaFin(LocalDateTime fechaFin) {
 			this.fechaFin = fechaFin;
 		}
 		

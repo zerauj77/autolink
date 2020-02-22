@@ -45,6 +45,7 @@ import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
 import com.autolink.request.ComentariosRequest;
 import com.autolink.request.EstadoRequest;
+import com.autolink.request.FechaRequest;
 import com.autolink.request.FilesRequest;
 import com.autolink.request.PreguntasRequest;
 import com.autolink.request.RepuestoXSolicitudRequest;
@@ -504,6 +505,19 @@ public class RestApi {
 	public ResponseEntity<?> updateSolicitudCProveedor(@RequestBody ComentariosRequest request) {
 			return ResponseEntity.ok(solc.updateComentarioProveedor(request.getId(),request.getComentario()));
 	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/FechaInicio/{id}"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateFechaInicio(@PathVariable BigDecimal id, @RequestBody FechaRequest fecha) {
+			return ResponseEntity.ok(solc.updateFechaInicio(id,fecha.getFecha()));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/FechaFin/{id}"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> updateFechaFin(@PathVariable BigDecimal id, @RequestBody FechaRequest fechaFin) {
+			return ResponseEntity.ok(solc.updateFechaFin(id, fechaFin.getFecha()));
+	}
 		
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"solicitud/byEstado"}, method = RequestMethod.GET)
@@ -549,6 +563,13 @@ public class RestApi {
 	@RequestMapping(value = {"oferta/save"}, method = RequestMethod.POST)
 	public ResponseEntity<?> saveOferta(@RequestBody OfertaProveedor oferta) {
 			return ResponseEntity.ok(opc.save(oferta));
+	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/ganador/{id}"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> saveGanador(@PathVariable BigDecimal id) {
+			return ResponseEntity.ok(opc.guardarGanador(id));
 	}
 	
 }

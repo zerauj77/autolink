@@ -1,6 +1,8 @@
 package com.autolink.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
@@ -151,6 +153,53 @@ public class SolicitudController {
 			}else {
 				resp.setCodigo(103);
 				resp.setMensaje("El comentario viene null");
+				return resp;
+			}
+		}else
+			resp.setCodigo(100);
+			resp.setMensaje("No existe esa solicitud");
+			return resp;
+			
+	}
+	
+	
+	public GenericResponse updateFechaInicio(BigDecimal id,String fechainicio) {
+		GenericResponse resp = new GenericResponse();
+		if(solRepository.existsById(id)) {
+			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			LocalDateTime dateTime = LocalDateTime.parse(fechainicio);
+			if(sol.getEstado() != null) {
+				sol.setFechaInicio(dateTime);;
+				solRepository.save(sol);
+				resp.setCodigo(500);
+				resp.setMensaje("Fecha Inicio Actualizada");
+				return resp;
+			}else {
+				resp.setCodigo(104);
+				resp.setMensaje("La fecha viene null");
+				return resp;
+			}
+		}else
+			resp.setCodigo(100);
+			resp.setMensaje("No existe esa solicitud");
+			return resp;
+			
+	}
+	
+	public GenericResponse updateFechaFin(BigDecimal id,String fechaFin) {
+		GenericResponse resp = new GenericResponse();
+		if(solRepository.existsById(id)) {
+			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			LocalDateTime dateTime = LocalDateTime.parse(fechaFin);
+			if(sol.getEstado() != null) {
+				sol.setFechaInicio(dateTime);;
+				solRepository.save(sol);
+				resp.setCodigo(500);
+				resp.setMensaje("Fecha Fin Actualizada");
+				return resp;
+			}else {
+				resp.setCodigo(104);
+				resp.setMensaje("La fecha viene null");
 				return resp;
 			}
 		}else
