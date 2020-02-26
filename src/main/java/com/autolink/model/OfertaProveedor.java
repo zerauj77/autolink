@@ -25,6 +25,7 @@ public class OfertaProveedor implements java.io.Serializable {
 	String estado;
 	Date tiempoEntrega;
 	boolean ganador;
+	Integer tiempo;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,15 +85,6 @@ public class OfertaProveedor implements java.io.Serializable {
 		this.estado = estado;
 	}
 
-	
-	@Column(name = "tiempoEntrega", length = 50)
-	public Date getTiempoEntrega() {
-		return tiempoEntrega;
-	}
-
-	public void setTiempoEntrega(Date tiempoEntrega) {
-		this.tiempoEntrega = tiempoEntrega;
-	}
 
 	@Column(name = "ganador", length = 1)
 	public boolean isGanador() {
@@ -102,9 +94,18 @@ public class OfertaProveedor implements java.io.Serializable {
 	public void setGanador(boolean ganador) {
 		this.ganador = ganador;
 	}
+
 	
 	
-	
+	@Column(name = "tiempo")
+	public Integer getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(Integer tiempo) {
+		this.tiempo = tiempo;
+	}
+
 	
 	
 

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.mail.MessagingException;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,7 @@ import com.autolink.request.ComentariosRequest;
 import com.autolink.request.EstadoRequest;
 import com.autolink.request.FechaRequest;
 import com.autolink.request.FilesRequest;
+import com.autolink.request.NewOferta;
 import com.autolink.request.PreguntasRequest;
 import com.autolink.request.RepuestoXSolicitudRequest;
 import com.autolink.request.SolicitudRequest;
@@ -561,9 +563,16 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"oferta/save"}, method = RequestMethod.POST)
-	public ResponseEntity<?> saveOferta(@RequestBody OfertaProveedor oferta) {
+	public ResponseEntity<?> saveOferta(@RequestBody NewOferta oferta) {
 			return ResponseEntity.ok(opc.save(oferta));
 	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/save2"}, method = RequestMethod.POST)
+	public ResponseEntity<?> saveOferta2(@RequestBody NewOferta oferta) {
+			return ResponseEntity.ok(opc.save(oferta));
+	}
+	
 	
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -571,5 +580,33 @@ public class RestApi {
 	public ResponseEntity<?> saveGanador(@PathVariable BigDecimal id) {
 			return ResponseEntity.ok(opc.guardarGanador(id));
 	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/delete/{id}"}, method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteOferta(@PathVariable BigDecimal id) {
+			return ResponseEntity.ok(opc.delete(id));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/ganador/{id}"}, method = RequestMethod.GET)
+	public ResponseEntity<?> infoGanador(@PathVariable BigDecimal id) {
+			return ResponseEntity.ok(opc.infoGanador(id));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"proveedor/solicitudes/{id}/{estado}"}, method = RequestMethod.GET)
+	public ResponseEntity<?> infoproveedoresSolicitud(@PathVariable BigDecimal id,@PathVariable String estado) {
+			return ResponseEntity.ok(opc.proveedorGanador(estado, id));
+	}
+	
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"proveedor/ganador/all/{idS}/{idP}"}, method = RequestMethod.PUT)
+	public ResponseEntity<?> guardarGanadorAll(@PathVariable BigDecimal idS, @PathVariable BigDecimal idP) {
+			return ResponseEntity.ok(opc.guardarGanadorAll(idS,idP));
+	}
+	
+	
 	
 }
