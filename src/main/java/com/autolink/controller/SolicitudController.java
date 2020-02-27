@@ -97,7 +97,7 @@ public class SolicitudController {
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
 			
-			if(sol.getEstado() != null) {
+			if(estado != null) {
 				sol.setEstado(estado);
 				solRepository.save(sol);
 				resp.setCodigo(500);
