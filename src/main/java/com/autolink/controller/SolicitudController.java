@@ -120,7 +120,7 @@ public class SolicitudController {
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
 			
-			if(sol.getEstado() != null) {
+			if(taller != null) {
 				sol.setComentariosTaller(taller);;
 				solRepository.save(sol);
 				resp.setCodigo(500);
@@ -144,7 +144,7 @@ public class SolicitudController {
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
 			
-			if(sol.getEstado() != null) {
+			if(aseguradora != null) {
 				sol.setComentariosAseguradora(aseguradora);
 				solRepository.save(sol);
 				resp.setCodigo(500);
@@ -167,8 +167,8 @@ public class SolicitudController {
 		GenericResponse resp = new GenericResponse();
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
-			LocalDateTime dateTime = LocalDateTime.parse(fechainicio);
-			if(sol.getEstado() != null) {
+			if(fechainicio != null) {
+				LocalDateTime dateTime = LocalDateTime.parse(fechainicio);
 				sol.setFechaInicio(dateTime);;
 				solRepository.save(sol);
 				resp.setCodigo(500);
@@ -190,8 +190,11 @@ public class SolicitudController {
 		GenericResponse resp = new GenericResponse();
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
+			
+			
+			if(fechaFin != null) {
 			LocalDateTime dateTime = LocalDateTime.parse(fechaFin);
-			if(sol.getEstado() != null) {
+			
 				sol.setFechaInicio(dateTime);;
 				solRepository.save(sol);
 				resp.setCodigo(500);
@@ -215,7 +218,7 @@ public class SolicitudController {
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
 			
-			if(sol.getEstado() != null) {
+			if(proveedor != null) {
 				sol.setComentariosProveedores(proveedor);
 				solRepository.save(sol);
 				resp.setCodigo(500);
