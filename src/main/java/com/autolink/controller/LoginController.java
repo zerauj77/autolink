@@ -39,6 +39,7 @@ public class LoginController {
 				if(usu.getContra().equals(contraseña)) {
 					res.setMensaje("Ingreso exitoso");
 					res.setNombre(usu.getNombre());
+					res.setId(usu.getId());
 					res.setUser(usuario);
 					tp = usu.getTipo();
 					res.setIdTipo(tp.getId());

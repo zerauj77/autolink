@@ -9,7 +9,8 @@ public class LoginResponse implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		
+	
+	private BigDecimal id;
 	private String mensaje;
 	private String nombre;
 	private String user;
@@ -46,7 +47,18 @@ public class LoginResponse implements java.io.Serializable {
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+		
+		
 	}
+	public BigDecimal getId() {
+		return id;
+	}
+	public void setId(BigDecimal id) {
+		this.id = id;
+	}
+	
+	
+	
 	
 	
 	
