@@ -38,6 +38,34 @@ public class SolicitudController {
 	RepuestoXSolicitudRepository rSRepository;
 	
 	
+	public GenericResponse deleteRepuestoXSolicitud(BigDecimal idSolicitud, BigDecimal idRepuesto) {
+		GenericResponse resp = new GenericResponse();
+		
+		Repuestos r = this.getRepuesto(idRepuesto);
+		Solicitud s = this.getSolicitudById(idSolicitud);
+		if(s == null || r == null) {
+			resp.setCodigo(102);
+			resp.setMensaje("No existe el Id de solicitud o de repuesto");
+			return resp;
+		}
+		RepuestoXSolicitudKeys keys = new RepuestoXSolicitudKeys();
+		keys.setIdrepuesto(r.getId());
+		keys.setIdsolicitud(s.getId());
+		if(rSRepository.existsById(keys)) {
+			RepuestoXSolicitud rs = rSRepository.findById(keys).get();
+			rSRepository.delete(rs);
+			resp.setCodigo(100);
+			resp.setMensaje("Registro eliminado con Exito");
+		}
+		else {
+			resp.setCodigo(102);
+			resp.setMensaje("No existe el Id");
+		}
+			
+		
+		return resp;
+	}
+	
 	public Iterable<Solicitud> getAllSolicitud() {
 		return solRepository.findAll();
 	}

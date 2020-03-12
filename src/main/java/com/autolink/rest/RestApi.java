@@ -533,6 +533,12 @@ public class RestApi {
 			return ResponseEntity.ok(solc.saveRepuestoxSolicitud(rsr));
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/repuesto/delete"}, method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteSolicitudRepuesto(@RequestBody RepuestoXSolicitudRequest rsr) {
+			return ResponseEntity.ok(solc.deleteRepuestoXSolicitud(rsr.getId(), rsr.getIdRepuesto()));
+	}
+	
 	
 	
 	@CrossOrigin(origins="http://localhost:4200") 
@@ -606,6 +612,9 @@ public class RestApi {
 	public ResponseEntity<?> guardarGanadorAll(@PathVariable BigDecimal idS, @PathVariable BigDecimal idP) {
 			return ResponseEntity.ok(opc.guardarGanadorAll(idS,idP));
 	}
+	
+	
+	
 	
 	
 	
