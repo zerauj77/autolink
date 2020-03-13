@@ -455,8 +455,8 @@ public class RestApi {
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200") 
-	@RequestMapping(value = {"solicitud/foto"}, method = RequestMethod.GET)
-	public ResponseEntity<?> getSolicitudXfotoAll(@RequestParam BigDecimal id) {
+	@RequestMapping(value = {"solicitud/foto/{id}"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getSolicitudXfotoAll(@PathVariable BigDecimal id) {
 			return ResponseEntity.ok(solc.getAllFotosXSolicitud(id));
 	}
 	

@@ -81,7 +81,8 @@ public class SolicitudController {
 	}
 	
 	public Iterable<FotosXSolicitud> getAllFotosXSolicitud(BigDecimal id) {
-		return fSRepository.findByIdSolicitud(id);
+		Solicitud sol = solRepository.findById(id).orElse(null);
+		return fSRepository.findByIdSolicitud(sol);
 	}
 	
 	public Solicitud getOneSolicitudByCode(String codigo){
