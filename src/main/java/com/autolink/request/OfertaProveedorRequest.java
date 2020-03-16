@@ -5,6 +5,7 @@ public class OfertaProveedorRequest implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	Integer cantidad;
 	Integer tiempo;
+	Double precio;
 	
 	public Integer getCantidad() {
 		return cantidad;
@@ -18,6 +19,14 @@ public class OfertaProveedorRequest implements java.io.Serializable {
 	public void setTiempo(Integer tiempo) {
 		this.tiempo = tiempo;
 	}
+	public Double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+	
+	
 	
 	
 

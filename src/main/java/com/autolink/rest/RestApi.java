@@ -566,6 +566,18 @@ public class RestApi {
 			return ResponseEntity.ok(opc.getAllOfertaProveedorBySolicitud(id));
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"oferta/bySolicitudAndByProveedor/{idSolicitud}/{idProveedor}"}, method = RequestMethod.GET)
+	public ResponseEntity<?> getOfertasBySolicitudAndProveedor(@PathVariable BigDecimal idSolicitud,@PathVariable BigDecimal idProveedor) {
+			return ResponseEntity.ok(opc.getAllOfertaProveedorBySolicitudAndByProveedor(idSolicitud, idProveedor));
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200") 
+	@RequestMapping(value = {"solicitud/fotos/delete/{id}"}, method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteFotos(@PathVariable BigDecimal id) {
+			return ResponseEntity.ok(solc.deleteFile(id));
+	}
+	
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"oferta/save"}, method = RequestMethod.POST)

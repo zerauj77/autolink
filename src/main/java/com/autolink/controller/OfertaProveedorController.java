@@ -3,7 +3,6 @@ package com.autolink.controller;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import com.autolink.model.Solicitud;
 import com.autolink.request.NewOferta;
 import com.autolink.request.OfertaProveedorRequest;
 import com.autolink.responses.GenericResponse;
+import com.autolink.responses.OfertaResponse;
 import com.autolink.responses.SolicitudResponse;
 
 public class OfertaProveedorController {
@@ -45,12 +45,58 @@ public class OfertaProveedorController {
 		return oPRepository.findAll();
 	}
 	
-	public Iterable<OfertaProveedor> getAllOfertaProveedorBySolicitud(BigDecimal id) {
-		Solicitud solicitud = solRepository.findById(id).orElse(null); 
+	public Iterable<OfertaResponse> getAllOfertaProveedorBySolicitudAndByProveedor(BigDecimal idSolicitud,BigDecimal idProveedor){
+		List<OfertaResponse> resp = new ArrayList<OfertaResponse>();
+		OfertaResponse oferta;
+		Solicitud solicitud = solRepository.findById(idSolicitud).orElse(null); 
 		if(solicitud == null) {
 			return null;
 		}
-		return oPRepository.findByIdSolicitud(solicitud);
+		Proveedor proveedor = proRepository.findById(idProveedor).orElse(null); 
+		if(proveedor == null) {
+			return null;
+		}
+		
+		Iterable<OfertaProveedor> ofertas = oPRepository.findByIdProveedorAndIdSolicitud(proveedor, solicitud);
+		for (OfertaProveedor obj : ofertas) {
+			oferta = new OfertaResponse();
+			oferta.setCantidad(obj.getCantidad());
+			oferta.setEstado(obj.getEstado());
+			oferta.setGanador(obj.isGanador());
+			oferta.setId(obj.getId());
+			oferta.setIdProveedor(obj.getIdProveedor().getId());
+			oferta.setIdRepuesto(obj.getIdRepuesto().getId());
+			oferta.setProveedor(obj.getIdProveedor().getNombre());
+			oferta.setRepuesto(obj.getIdRepuesto().getNombre());
+			oferta.setTiempo(obj.getTiempo());
+			resp.add(oferta);
+		}
+		return resp;
+	}
+	
+	public Iterable<OfertaResponse> getAllOfertaProveedorBySolicitud(BigDecimal id) {
+		List<OfertaResponse> resp = new ArrayList<OfertaResponse>();
+		Solicitud solicitud = solRepository.findById(id).orElse(null); 
+		OfertaResponse oferta;
+		if(solicitud == null) {
+			return null;
+		}
+		Iterable<OfertaProveedor> ofertas =  oPRepository.findByIdSolicitud(solicitud);
+		for (OfertaProveedor obj : ofertas) {
+			oferta = new OfertaResponse();
+			oferta.setCantidad(obj.getCantidad());
+			oferta.setEstado(obj.getEstado());
+			oferta.setGanador(obj.isGanador());
+			oferta.setId(obj.getId());
+			oferta.setIdProveedor(obj.getIdProveedor().getId());
+			oferta.setIdRepuesto(obj.getIdRepuesto().getId());
+			oferta.setProveedor(obj.getIdProveedor().getNombre());
+			oferta.setRepuesto(obj.getIdRepuesto().getNombre());
+			oferta.setTiempo(obj.getTiempo());
+			resp.add(oferta);
+		}
+		return resp;
+				
 	}
 	
 	public OfertaProveedor save(OfertaProveedor oferta) {
@@ -213,6 +259,9 @@ public class OfertaProveedorController {
 			}
 			if(opr.getTiempo() != null) {
 				op.setTiempo(opr.getTiempo());
+			}
+			if(opr.getPrecio() != null) {
+				op.setPrecio(opr.getPrecio());
 			}
 			return oPRepository.save(op);
 		 

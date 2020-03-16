@@ -2,7 +2,6 @@ package com.autolink.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
@@ -346,6 +345,14 @@ public class SolicitudController {
 	            throw new Exception("No se puede guardar el archivo " + fileName + ". Intente nuevamente! Ex:", ex);
 	        }
 	    }
+		
+		public GenericResponse deleteFile(BigDecimal fileId) {
+			GenericResponse resp = new GenericResponse();
+			fSRepository.deleteById(fileId);
+			resp.setCodigo(100);
+			resp.setMensaje("Registro eliminado con Exito");
+			return resp;
+		}
 
 	    public FotosXSolicitud getFile(BigDecimal fileId) {
 	        return fSRepository.findById(fileId).orElse(null);
