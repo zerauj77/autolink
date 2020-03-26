@@ -18,6 +18,8 @@ public class NewOferta implements java.io.Serializable {
 	private String estado;
 	private boolean ganador;
 	private Integer tiempo;
+	private Double precio;
+	
 	public BigDecimal getIdSolicitud() {
 		return idSolicitud;
 	}
@@ -60,6 +62,13 @@ public class NewOferta implements java.io.Serializable {
 	public void setTiempo(Integer tiempo) {
 		this.tiempo = tiempo;
 	}
+	public Double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+	
 	
 	
 	

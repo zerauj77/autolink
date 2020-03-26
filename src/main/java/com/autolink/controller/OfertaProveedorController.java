@@ -69,6 +69,7 @@ public class OfertaProveedorController {
 			oferta.setProveedor(obj.getIdProveedor().getNombre());
 			oferta.setRepuesto(obj.getIdRepuesto().getNombre());
 			oferta.setTiempo(obj.getTiempo());
+			oferta.setPrecio(obj.getPrecio());
 			resp.add(oferta);
 		}
 		return resp;
@@ -93,6 +94,7 @@ public class OfertaProveedorController {
 			oferta.setProveedor(obj.getIdProveedor().getNombre());
 			oferta.setRepuesto(obj.getIdRepuesto().getNombre());
 			oferta.setTiempo(obj.getTiempo());
+			oferta.setPrecio(obj.getPrecio());
 			resp.add(oferta);
 		}
 		return resp;
@@ -125,6 +127,7 @@ public class OfertaProveedorController {
 		resp.setIdRepuesto(repuesto);
 		resp.setTiempo(oferta.getTiempo());
 		resp.setIdProveedor(proveedor);
+		resp.setPrecio(oferta.getPrecio());
 		return oPRepository.save(resp);
 	}
 	
