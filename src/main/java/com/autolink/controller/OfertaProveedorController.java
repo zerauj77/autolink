@@ -108,6 +108,7 @@ public class OfertaProveedorController {
 		
 	public OfertaProveedor save(NewOferta oferta){
 		OfertaProveedor resp = new OfertaProveedor();
+		OfertaProveedor upd;
 		Solicitud solicitud = solRepository.findById(oferta.getIdSolicitud()).orElse(null); 
 		if(solicitud == null) {
 			return null;
@@ -120,15 +121,32 @@ public class OfertaProveedorController {
 		if(repuesto == null) {
 			return null;
 		}
-		resp.setCantidad(oferta.getCantidad());
-		resp.setEstado(oferta.getEstado());
-		resp.setGanador(oferta.isGanador());
-		resp.setIdSolicitud(solicitud);
-		resp.setIdRepuesto(repuesto);
-		resp.setTiempo(oferta.getTiempo());
-		resp.setIdProveedor(proveedor);
-		resp.setPrecio(oferta.getPrecio());
-		return oPRepository.save(resp);
+		upd = oPRepository.findByIdSolicitudAndIdRepuestoAndIdProveedor(solicitud, repuesto, proveedor);
+		if(upd != null) {
+			if(oferta.getCantidad() != null) {
+				upd.setCantidad(oferta.getCantidad());
+			}
+			if(oferta.getEstado() != null) {
+				upd.setEstado(oferta.getEstado());
+			}
+			if(oferta.getTiempo() != null) {
+				upd.setTiempo(oferta.getTiempo());
+			}
+			if(oferta.getPrecio() !=null) {
+				upd.setPrecio(oferta.getPrecio());
+			}
+			return oPRepository.save(upd);
+		}else {
+			resp.setCantidad(oferta.getCantidad());
+			resp.setEstado(oferta.getEstado());
+			resp.setGanador(oferta.isGanador());
+			resp.setIdSolicitud(solicitud);
+			resp.setIdRepuesto(repuesto);
+			resp.setTiempo(oferta.getTiempo());
+			resp.setIdProveedor(proveedor);
+			resp.setPrecio(oferta.getPrecio());
+			return oPRepository.save(resp);
+		}
 	}
 	
 	

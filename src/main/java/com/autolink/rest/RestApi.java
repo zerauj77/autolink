@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.mail.MessagingException;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,6 @@ import com.autolink.model.Aseguradora;
 import com.autolink.model.CallCenter;
 import com.autolink.model.Marca;
 import com.autolink.model.Modelo;
-import com.autolink.model.OfertaProveedor;
 import com.autolink.model.Preguntas;
 import com.autolink.model.PreguntasXUsuario;
 import com.autolink.model.Proveedor;
@@ -44,14 +42,17 @@ import com.autolink.model.Solicitud;
 import com.autolink.model.Taller;
 import com.autolink.model.TipoUsuario;
 import com.autolink.model.Usuarios;
+import com.autolink.request.AseguradoraInsert;
 import com.autolink.request.ComentariosRequest;
 import com.autolink.request.EstadoRequest;
 import com.autolink.request.FechaRequest;
 import com.autolink.request.FilesRequest;
 import com.autolink.request.NewOferta;
 import com.autolink.request.PreguntasRequest;
+import com.autolink.request.ProveedorInsert;
 import com.autolink.request.RepuestoXSolicitudRequest;
 import com.autolink.request.SolicitudRequest;
+import com.autolink.request.TallerInsert;
 import com.autolink.responses.GenericResponse;
 import com.autolink.responses.LoginResponse;
 
@@ -245,7 +246,7 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"taller/update"}, method = RequestMethod.PUT)
-	public Taller updateTaller(@RequestBody Taller prov) {
+	public Taller updateTaller(@RequestBody TallerInsert prov) {
 			return tallerc.update(prov);
 	}
 	
@@ -280,7 +281,7 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"aseguradora/update"}, method = RequestMethod.PUT)
-	public Aseguradora updateAseguradora(@RequestBody Aseguradora prov) {
+	public Aseguradora updateAseguradora(@RequestBody AseguradoraInsert prov) {
 			return asec.update(prov);
 	}
 	
@@ -346,7 +347,7 @@ public class RestApi {
 	
 	@CrossOrigin(origins="http://localhost:4200") 
 	@RequestMapping(value = {"proveedor/update"}, method = RequestMethod.PUT)
-	public Proveedor updateProveedor(@RequestBody Proveedor prov) {
+	public Proveedor updateProveedor(@RequestBody ProveedorInsert prov) {
 			return proveedorc.update(prov);
 	}
 	

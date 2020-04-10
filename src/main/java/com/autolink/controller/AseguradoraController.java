@@ -5,12 +5,18 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.AseguradoraRepository;
+import com.autolink.interfaces.UsuarioRepository;
 import com.autolink.model.Aseguradora;
+import com.autolink.model.Usuarios;
+import com.autolink.request.AseguradoraInsert;
 
 public class AseguradoraController {
 
 	@Autowired
 	AseguradoraRepository aseguradoraRepository;
+	
+	@Autowired
+	UsuarioRepository usuRepository;
 	
 	public Iterable<Aseguradora> getAllAseguradoraes() {
 		return aseguradoraRepository.findAll();
@@ -36,24 +42,32 @@ public class AseguradoraController {
 		
 	}
 	
-	public Aseguradora update(Aseguradora aseguradora){
-		Aseguradora ase = this.aseguradoraRepository.findByNombre(aseguradora.getNombre());
-		if(aseguradora.getIva() != null) {
-			ase.setIva(aseguradora.getIva());
+	public Aseguradora update(AseguradoraInsert aseguradora){
+		Aseguradora ase = this.aseguradoraRepository.findById(aseguradora.getId()).orElse(null);
+		if(ase !=null) {
+			if(aseguradora.getIva() != null) {
+				ase.setIva(aseguradora.getIva());
+			}
+			if(aseguradora.getNit() != null) {
+				ase.setNit(aseguradora.getNit());
+			}
+			if(aseguradora.getRazonsocial() != null) {
+				ase.setRazonsocial(aseguradora.getRazonsocial());
+			}
+			if(aseguradora.getCargo() != null) {
+				ase.setCargo(aseguradora.getCargo());
+			}
+			if(aseguradora.getUsuario() != null) {
+				Usuarios usu = usuRepository.findByUsuario(aseguradora.getUsuario());
+				ase.setUsuario(usu);
+			}
+			if(aseguradora.getNombre() !=null) {
+				ase.setNombre(aseguradora.getNombre());
+			}
+			return aseguradoraRepository.save(ase);
+		}else {
+			return null;
 		}
-		if(aseguradora.getNit() != null) {
-			ase.setNit(aseguradora.getNit());
-		}
-		if(aseguradora.getRazonsocial() != null) {
-			ase.setRazonsocial(aseguradora.getRazonsocial());
-		}
-		if(aseguradora.getCargo() != null) {
-			ase.setCargo(aseguradora.getCargo());
-		}
-		if(aseguradora.getUsuario() != null) {
-			ase.setUsuario(aseguradora.getUsuario());
-		}
-		return aseguradoraRepository.save(ase);
 	}
 
 

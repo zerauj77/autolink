@@ -63,11 +63,18 @@ public class AutoController {
 	}
 	
 	public Modelo updateModelo(Modelo modelo){
-		Modelo model = modeloRepository.findByNombre(modelo.getNombre());
-		if(modelo.getMarca() != null) {
-			model.setMarca(modelo.getMarca());
+		Modelo model = modeloRepository.findById(modelo.getId()).orElse(null);
+		if(model != null) {
+			if(modelo.getMarca() != null) {
+				model.setMarca(modelo.getMarca());
+			}
+			if(modelo.getNombre() !=null) {
+				model.setNombre(modelo.getNombre());
+			}
+			return modeloRepository.save(model);
+		}else {
+			return null;
 		}
-		return modeloRepository.save(model);
 	}
 	
 		

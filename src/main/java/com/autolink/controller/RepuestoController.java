@@ -22,14 +22,19 @@ public class RepuestoController {
 		}
 		
 		public Repuestos update(Repuestos repuesto){
-			Repuestos prov = this.findByrepuesto(repuesto.getNombre());
-			if(repuesto.getValor() != null) {
-				prov.setValor(repuesto.getValor());
+			Repuestos prov = repuestoRepository.findById(repuesto.getId()).orElse(null);
+			if(prov != null) {
+				if(repuesto.getValor() != null) {
+					prov.setValor(repuesto.getValor());
+				}
+				if(repuesto.getNombre() != null) {
+					prov.setNombre(repuesto.getNombre());
+				}
+				return repuestoRepository.save(prov);
+			}else {
+				return null;
 			}
-			if(repuesto.getNombre() != null) {
-				prov.setNombre(repuesto.getNombre());
-			}
-			return repuestoRepository.save(prov);
+			
 		}
 		
 		public Repuestos findByrepuesto(String repuesto){

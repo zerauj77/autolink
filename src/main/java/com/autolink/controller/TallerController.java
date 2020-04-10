@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autolink.interfaces.TallerRepository;
+import com.autolink.interfaces.UsuarioRepository;
 import com.autolink.model.Taller;
 import com.autolink.model.Usuarios;
+import com.autolink.request.TallerInsert;
 
 public class TallerController {
 	@Autowired
@@ -14,6 +16,9 @@ public class TallerController {
 	
 	@Autowired
 	UsuarioController usuc;
+	
+	@Autowired
+	UsuarioRepository usuRepository;
 	
 	public Iterable<Taller> getAllTalleres() {
 		return tallerRepository.findAll();
@@ -41,27 +46,34 @@ public class TallerController {
 		
 	}
 	
-	public Taller update(Taller taller){
-		Taller ta = this.tallerRepository.findByNombre(taller.getNombre());
-		if(taller.getCargo() != null) {
-			ta.setCargo(taller.getCargo());
+	public Taller update(TallerInsert taller){
+		Taller ta = this.tallerRepository.findById(taller.getId()).orElse(null);
+		if(ta != null) {
+			if(taller.getCargo() != null) {
+				ta.setCargo(taller.getCargo());
+			}
+			if(taller.getRazonsocial() != null) {
+				ta.setRazonsocial(taller.getRazonsocial());
+			}
+			if(taller.getTelefono() != null) {
+				ta.setTelefono(taller.getTelefono());
+			}
+			if(taller.getUsuario() != null) {
+				Usuarios usu = usuRepository.findByUsuario(taller.getUsuario());
+				ta.setUsuario(usu);
+			}
+			if(taller.getDireccion() != null) {
+				ta.setDireccion(taller.getDireccion());
+			}
+			if(taller.getNombre() != null) {
+				ta.setNombre(taller.getNombre());
+			}
+			
+			return tallerRepository.save(ta);
+		}else {
+			return null;
 		}
-		if(taller.getRazonsocial() != null) {
-			ta.setRazonsocial(taller.getRazonsocial());
-		}
-		if(taller.getTelefono() != null) {
-			ta.setTelefono(taller.getTelefono());
-		}
-		if(taller.getUsuario() != null) {
-			ta.setUsuario(taller.getUsuario());
-		}
-		if(taller.getDireccion() != null) {
-			ta.setDireccion(taller.getDireccion());
-		}
-		if(taller.getNombre() != null) {
-			ta.setNombre(taller.getNombre());
-		}
-		return tallerRepository.save(ta);
+		
 	}
 	
 	public Taller changeEstado(String taller, boolean estado){

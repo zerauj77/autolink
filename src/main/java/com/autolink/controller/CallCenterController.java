@@ -36,20 +36,28 @@ public class CallCenterController {
 	}
 	
 	public CallCenter update(CallCenter callCenter){
-		CallCenter ase = this.callCenterRepository.findByNombre(callCenter.getNombre());
-		if(callCenter.getTelefono() != null) {
-			ase.setTelefono(callCenter.getTelefono());
+		CallCenter ase = this.callCenterRepository.findById(callCenter.getId()).orElse(null);
+		if(ase != null) {
+			if(callCenter.getTelefono() != null) {
+				ase.setTelefono(callCenter.getTelefono());
+			}
+			if(callCenter.getRazonsocial() != null) {
+				ase.setRazonsocial(callCenter.getRazonsocial());
+			}
+			if(callCenter.getCargo() != null) {
+				ase.setCargo(callCenter.getCargo());
+			}
+			if(callCenter.getUsuario() != null) {
+				ase.setUsuario(callCenter.getUsuario());
+			}
+			if(callCenter.getNombre() !=null) {
+				ase.setNombre(callCenter.getNombre());
+			}
+			return callCenterRepository.save(ase);
+		}else {
+			return null;
 		}
-		if(callCenter.getRazonsocial() != null) {
-			ase.setRazonsocial(callCenter.getRazonsocial());
-		}
-		if(callCenter.getCargo() != null) {
-			ase.setCargo(callCenter.getCargo());
-		}
-		if(callCenter.getUsuario() != null) {
-			ase.setUsuario(callCenter.getUsuario());
-		}
-		return callCenterRepository.save(ase);
+		
 	}
 
 
