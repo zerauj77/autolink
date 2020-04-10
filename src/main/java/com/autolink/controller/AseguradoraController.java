@@ -59,7 +59,10 @@ public class AseguradoraController {
 			}
 			if(aseguradora.getUsuario() != null) {
 				Usuarios usu = usuRepository.findByUsuario(aseguradora.getUsuario());
-				ase.setUsuario(usu);
+				if(usu != null) {
+					ase.setUsuario(usu);
+				}
+				
 			}
 			if(aseguradora.getNombre() !=null) {
 				ase.setNombre(aseguradora.getNombre());

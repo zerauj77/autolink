@@ -60,7 +60,10 @@ public class TallerController {
 			}
 			if(taller.getUsuario() != null) {
 				Usuarios usu = usuRepository.findByUsuario(taller.getUsuario());
-				ta.setUsuario(usu);
+				if(usu != null) {
+					ta.setUsuario(usu);
+				}
+				
 			}
 			if(taller.getDireccion() != null) {
 				ta.setDireccion(taller.getDireccion());

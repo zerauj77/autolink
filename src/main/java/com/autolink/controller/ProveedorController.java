@@ -50,7 +50,10 @@ public class ProveedorController {
 			}
 			if(proveedor.getUsuario() != null) {
 				Usuarios usu = usuRepository.findByUsuario(proveedor.getUsuario());
-				prov.setUsuario(usu);
+				if(usu != null) {
+					prov.setUsuario(usu);
+				}
+				
 			}
 			if(proveedor.getNombre() !=null) {
 				prov.setNombre(proveedor.getNombre());
