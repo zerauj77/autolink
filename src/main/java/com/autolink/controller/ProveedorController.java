@@ -58,6 +58,9 @@ public class ProveedorController {
 			if(proveedor.getNombre() !=null) {
 				prov.setNombre(proveedor.getNombre());
 			}
+			if(proveedor.getPorcentajepago() !=null) {
+				prov.setPorcentajepago(proveedor.getPorcentajepago());
+			}
 			return proveedorRepository.save(prov);
 		}else {
 			return null;

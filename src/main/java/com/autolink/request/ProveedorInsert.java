@@ -20,6 +20,7 @@ public class ProveedorInsert implements java.io.Serializable {
 	private String telefono;
 	private String cuentabancaria;
 	private String usuario;
+	private Integer porcentajepago;
 	public BigDecimal getId() {
 		return id;
 	}
@@ -92,6 +93,13 @@ public class ProveedorInsert implements java.io.Serializable {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+	public Integer getPorcentajepago() {
+		return porcentajepago;
+	}
+	public void setPorcentajepago(Integer porcentajepago) {
+		this.porcentajepago = porcentajepago;
+	}
+	
 
 
 }

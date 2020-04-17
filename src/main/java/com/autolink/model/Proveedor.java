@@ -29,6 +29,7 @@ public class Proveedor implements java.io.Serializable {
 	private String telefono;
 	private String cuentabancaria;
 	private Usuarios usuario;
+	private Integer porcentajepago;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -139,5 +140,17 @@ public class Proveedor implements java.io.Serializable {
 	public void setUsuario(Usuarios usuario) {
 		this.usuario = usuario;
 	}
+
+	
+	@Column(name = "porcentajepago")
+	public Integer getPorcentajepago() {
+		return porcentajepago;
+	}
+
+	public void setPorcentajepago(Integer porcentajepago) {
+		this.porcentajepago = porcentajepago;
+	}
+	
+	
 
 }
