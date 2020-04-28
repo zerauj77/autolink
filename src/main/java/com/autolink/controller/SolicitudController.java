@@ -2,6 +2,7 @@ package com.autolink.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
@@ -196,6 +197,7 @@ public class SolicitudController {
 		if(solRepository.existsById(id)) {
 			Solicitud sol = solRepository.findById(id).orElse(new Solicitud());
 			if(fechainicio != null) {
+				DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 				LocalDateTime dateTime = LocalDateTime.parse(fechainicio);
 				sol.setFechaInicio(dateTime);;
 				solRepository.save(sol);
@@ -221,6 +223,7 @@ public class SolicitudController {
 			
 			
 			if(fechaFin != null) {
+				DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 			LocalDateTime dateTime = LocalDateTime.parse(fechaFin);
 			
 				sol.setFechaInicio(dateTime);;
